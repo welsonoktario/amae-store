@@ -1,3 +1,4 @@
 {
-  "*.(ts|tsx|json|yml|yaml|md|css)": ["npm run eslint", "npm run prettier:fix"]
+  "*.(ts|tsx)": "npm run eslint",
+  "*.(ts|tsx|json|yml|yaml|md|css)": ["npm run prettier:fix"]
 }
