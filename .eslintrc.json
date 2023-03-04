@@ -1,10 +1,6 @@
 {
-  "extends": [
-    "next",
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "simple-import-sort"
-  ],
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
+  "plugins": ["simple-import-sort"],
   "globals": {
     "React": "readonly"
   },
