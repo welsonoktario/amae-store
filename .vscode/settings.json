@@ -1,5 +1,8 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prettier.endOfLine": "crlf"
+  "prettier.endOfLine": "crlf",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }
