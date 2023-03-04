@@ -1,0 +1,4 @@
+{
+  "**/*.(ts|tsx)": "npx tsc --noEmit",
+  "**/*.(ts|tsx|js)": ["npm run eslint", "npm run prettier:fix"]
+}
