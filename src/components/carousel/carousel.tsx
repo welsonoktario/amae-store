@@ -1,6 +1,10 @@
 import Image from 'next/image';
-import Flickity from 'react-flickity-component';
+import { EffectCoverflow, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './carousel.module.css';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 interface CarouseItemProps {
   images: string[];
@@ -8,12 +12,30 @@ interface CarouseItemProps {
 
 export default function Carousel({ images }: CarouseItemProps) {
   return (
-    <Flickity className={styles.carousel} reloadOnUpdate>
+    <Swiper
+      modules={[Navigation, EffectCoverflow]}
+      className={styles.carousel}
+      spaceBetween={16}
+      slidesPerView={1}
+      effect="coverflow"
+      autoplay={{
+        delay: 3000,
+      }}
+      loop
+      navigation
+    >
       {images.map((image, i) => (
-        <div className="relative h-96 w-full" key={`carousel-${i}`}>
-          <Image src={image} alt="img-1" fill priority sizes="100vw" />
-        </div>
+        <SwiperSlide className={styles['carouse-item']} key={`carousel-${i}`}>
+          <Image
+            className="rounded-lg"
+            src={image}
+            alt="img-1"
+            fill
+            priority
+            sizes="100vw"
+          />
+        </SwiperSlide>
       ))}
-    </Flickity>
+    </Swiper>
   );
 }

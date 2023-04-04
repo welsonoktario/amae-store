@@ -1,3 +1,4 @@
+import SectionTopUp from '@/components/section-topup/section-top-up';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
@@ -23,6 +24,7 @@ export default function Home() {
       </Head>
 
       <Carousel images={images} />
+      <SectionTopUp />
     </>
   );
 }
