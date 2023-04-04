@@ -1,0 +1,7 @@
+.footer {
+  @apply bg-base-200 text-base-content;
+}
+
+.footer-wrapper {
+  @apply container footer mx-auto p-8;
+}

@@ -1,0 +1,123 @@
+.header {
+  @apply fixed inset-x-0 top-0 z-50 bg-base-100;
+}
+
+.nav {
+  @apply container mx-auto flex flex-col px-4 py-4 md:flex-row lg:px-8 lg:py-8;
+}
+
+.nav-wrapper {
+  @apply grid w-full grid-flow-col items-center justify-between justify-items-center gap-4 lg:gap-8;
+}
+
+.nav-wrapper-sm {
+  @apply flex flex-col items-center md:hidden;
+}
+
+.nav-title {
+  @apply whitespace-nowrap text-xl font-bold normal-case text-emerald-500;
+}
+
+.nav-search {
+  @apply relative hidden w-full md:inline-flex;
+}
+
+.nav-search-sm {
+  @apply relative mt-4 inline-flex w-full md:hidden;
+}
+
+.nav-search-icon {
+  @apply absolute inset-y-0 left-0 ml-4 flex items-center;
+}
+
+.nav-search-input {
+  @apply input-bordered input input-sm flex-grow pl-10;
+}
+
+.nav-button {
+  @apply btn-ghost btn-circle btn text-emerald-500;
+}
+
+@keyframes enterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes enterFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes exitToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+@keyframes exitToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-30deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotateX(-10deg) scale(0.95);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

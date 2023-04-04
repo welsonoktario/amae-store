@@ -1,0 +1,3 @@
+.carousel {
+  @apply w-full overflow-hidden lg:mt-8;
+}

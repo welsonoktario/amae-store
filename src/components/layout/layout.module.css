@@ -1,0 +1,7 @@
+.main-wrapper {
+  @apply min-h-screen bg-emerald-100 pt-36 md:pt-28;
+}
+
+.content-wrapper {
+  @apply container mx-auto;
+}
