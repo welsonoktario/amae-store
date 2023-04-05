@@ -1,4 +1,4 @@
 {
-  "*.(ts|tsx)": "npm run eslint",
-  "*.(ts|tsx|json|yml|yaml|md|css)": ["npm run prettier:fix"]
+  "./src/*.(ts|tsx)": "npm run eslint",
+  "./src/*.(ts|tsx|json|yml|yaml|md|css)": ["npm run prettier:fix"]
 }

@@ -3,18 +3,21 @@ import CardGame from '../card-game/card-game';
 const games = [
   {
     id: 1,
-    title: 'Mobile Legends: Bang Bang',
-    thumbnail: 'https://picsum.photos/150/150',
+    title: 'Mobile Legends',
+    thumbnail:
+      'https://play-lh.googleusercontent.com/X4CgS6NWW7Q4YbiJP-PEqCsxqxXxM3TtCUIjKebYOBX66-24KsN9-ruUPsE7MW63G2E=s256-rw',
   },
   {
     id: 2,
     title: 'PUBGM',
-    thumbnail: 'https://picsum.photos/150/150',
+    thumbnail:
+      'https://play-lh.googleusercontent.com/JRd05pyBH41qjgsJuWduRJpDeZG0Hnb0yjf2nWqO7VaGKL10-G5UIygxED-WNOc3pg=s256-rw',
   },
   {
     id: 3,
     title: 'Free Fire',
-    thumbnail: 'https://picsum.photos/150/150',
+    thumbnail:
+      'https://play-lh.googleusercontent.com/WWcssdzTZvx7Fc84lfMpVuyMXg83_PwrfpgSBd0IID_IuupsYVYJ34S9R2_5x57gHQ=s256-rw',
   },
 ];
 
@@ -25,7 +28,7 @@ export default function SectionTopUp() {
         Top Up Game
       </p>
 
-      <div className="grid grid-cols-2 justify-items-center gap-4 rounded-lg bg-emerald-200 p-4 md:grid-cols-4">
+      <div className="grid grid-cols-3 justify-items-stretch gap-4 rounded-lg bg-emerald-200 p-4 md:grid-cols-5">
         {games.map((game, i) => (
           <CardGame
             title={game.title}
