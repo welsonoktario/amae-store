@@ -1,0 +1,15 @@
+.checkbox-wrapper {
+  @apply form-control;
+}
+
+.checkbox-content {
+  @apply label cursor-pointer;
+}
+
+.checkbox-check {
+  @apply checkbox-primary checkbox;
+}
+
+.checkbox-label {
+  @apply label-text ml-2;
+}

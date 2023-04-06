@@ -1,5 +1,7 @@
 .carousel {
   @apply h-56 w-full rounded-md md:h-72 lg:mt-8 lg:h-96;
+  --swiper-navigation-color: #5EBF39;
+  --swiper-pagination-color: #5EBF39;
 }
 
 .carousel-item {

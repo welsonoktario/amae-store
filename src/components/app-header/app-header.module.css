@@ -15,11 +15,11 @@
 }
 
 .nav-title {
-  @apply whitespace-nowrap text-xl font-bold normal-case text-emerald-500;
+  @apply whitespace-nowrap text-xl font-bold normal-case text-primary;
 }
 
 .nav-search {
-  @apply relative hidden w-full md:inline-flex;
+  @apply relative hidden w-full md:inline-block col-span-4;
 }
 
 .nav-search-sm {
@@ -31,11 +31,11 @@
 }
 
 .nav-search-input {
-  @apply input-bordered input input-sm flex-grow pl-10;
+  @apply input-bordered input input-sm w-full flex-grow pl-10;
 }
 
 .nav-button {
-  @apply btn-ghost btn-circle btn text-emerald-500;
+  @apply btn-ghost btn-circle btn text-primary;
 }
 
 @keyframes enterFromRight {

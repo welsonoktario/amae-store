@@ -7,7 +7,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans],
+        sans: ['var(--font-poppins)', ...fontFamily.sans],
+      },
+      colors: {
+        'primary-1': '#dff2d7',
+        'primary-2': '#b8e3a8',
+        'primary-3': '#92d378',
       },
     },
   },
@@ -19,5 +24,13 @@ module.exports = {
   daisyui: {
     themes: false,
     logs: false,
+    themes: [
+      {
+        light: {
+          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+          primary: '#5EBF39',
+        },
+      },
+    ],
   },
 };

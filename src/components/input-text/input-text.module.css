@@ -1,0 +1,15 @@
+.input-wrapper {
+  @apply form-control w-full;
+}
+
+.input-label {
+  @apply label;
+}
+
+.input-label-text {
+  @apply label-text font-medium;
+}
+
+.input-text {
+  @apply input-bordered input w-full;
+}

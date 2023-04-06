@@ -124,7 +124,7 @@ export default function MenuProfile() {
             </div>
             <button
               type="button"
-              className="btn-sm btn border-0 bg-emerald-400 capitalize"
+              className="btn-sm btn border-0 bg-primary-3 capitalize"
             >
               Isi Saldo
             </button>

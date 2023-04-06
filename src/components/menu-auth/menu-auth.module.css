@@ -1,0 +1,7 @@
+.menu-auth-wrapper {
+  @apply p-4;
+}
+
+.menu-auth-title {
+  @apply block text-center text-lg font-semibold;
+}

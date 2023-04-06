@@ -17,6 +17,10 @@ export default function AppNav() {
     { ssr: false }
   );
 
+  const MenuAuth = dynamic(() => import('@components/menu-auth/menu-auth'), {
+    ssr: false,
+  });
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -40,7 +44,7 @@ export default function AppNav() {
               as="div"
               className="relative z-50 inline-block justify-self-end text-left"
             >
-              {() => (
+              {({ open }) => (
                 <>
                   <Popover.Button className={styles['nav-button']}>
                     <svg
@@ -69,8 +73,9 @@ export default function AppNav() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Popover.Panel className="absolute right-0 mt-2 min-w-[35vw] rounded-xl bg-emerald-300 shadow-lg lg:min-w-[25vw]">
-                      <MenuProfile />
+                    <Popover.Panel className="absolute right-0 mt-2 min-w-[35vw] rounded-xl bg-primary-2 shadow-lg lg:min-w-[25vw]">
+                      {/* <MenuProfile /> */}
+                      <MenuAuth />
                     </Popover.Panel>
                   </Transition>
                 </>
@@ -116,7 +121,7 @@ export default function AppNav() {
                         <a
                           className={`${
                             active
-                              ? 'bg-emerald-400 text-white'
+                              ? 'bg-primary-1 text-white'
                               : 'text-zinc-900'
                           } transition-color group flex w-full items-center rounded-md px-2 py-2 text-sm duration-100`}
                           href="#"
@@ -130,7 +135,7 @@ export default function AppNav() {
                         <a
                           className={`${
                             active
-                              ? 'bg-emerald-400 text-white'
+                              ? 'bg-primary text-white'
                               : 'text-zinc-900'
                           } transition-color group mt-1 flex w-full items-center rounded-md px-2 py-2 text-sm duration-100`}
                           href="#"
@@ -144,7 +149,7 @@ export default function AppNav() {
                         <a
                           className={`${
                             active
-                              ? 'bg-emerald-400 text-white'
+                              ? 'bg-primary text-white'
                               : 'text-zinc-900'
                           } transition-color group mt-1 flex w-full items-center rounded-md px-2 py-2 text-sm duration-100`}
                           href="#"
