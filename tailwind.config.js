@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-poppins)', ...fontFamily.sans],
+        sans: ['var(--font-satoshi)', ...fontFamily.sans],
       },
       colors: {
         'primary-1': '#dff2d7',

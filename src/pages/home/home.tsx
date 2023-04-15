@@ -20,7 +20,9 @@ export default function Home() {
         <title>Amae Store</title>
       </Head>
 
-      <Carousel images={images} />
+      <section className="mt-4">
+        <Carousel images={images} />
+      </section>
       <SectionTopUp />
     </>
   );

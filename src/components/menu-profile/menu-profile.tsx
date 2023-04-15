@@ -1,4 +1,8 @@
+import { formatRupiah } from '@/lib/utils';
+
 export default function MenuProfile() {
+  const balance = formatRupiah(20000);
+
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between whitespace-nowrap p-4">
@@ -114,13 +118,7 @@ export default function MenuProfile() {
                   strokeWidth="2"
                 ></path>
               </svg>
-              <p className="text-sm font-bold">
-                {(20000).toLocaleString('id-ID', {
-                  style: 'currency',
-                  currency: 'IDR',
-                  maximumFractionDigits: 0,
-                })}
-              </p>
+              <p className="text-sm font-bold">{balance}</p>
             </div>
             <button
               type="button"

@@ -1,6 +1,6 @@
 import AppFooter from '@components/app-footer/app-footer';
 import AppHeader from '@components/app-header/app-header';
-import { Poppins } from 'next/font/google';
+import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 import styles from './layout.module.css';
 
@@ -8,15 +8,25 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const poppins = Poppins({
-  weight: ['400', '500', '600', '700', '800', '900'],
-  subsets: ['latin'],
-  variable: '--font-poppins',
+const satoshi = localFont({
+  src: [
+    {
+      path: '../../assets/fonts/Satoshi-Variable.woff2',
+      style: 'normal',
+    },
+    {
+      path: '../../assets/fonts/Satoshi-VariableItalic.woff2',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-satoshi',
 });
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className={`${poppins.className} ${styles['layout-wrapper']}`}>
+    <div
+      className={`${satoshi.variable} font-sans ${styles['layout-wrapper']}`}
+    >
       <AppHeader />
       <main className={styles['main-wrapper']}>
         <div className={styles['content-wrapper']}>{children}</div>
