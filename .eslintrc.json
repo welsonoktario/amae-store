@@ -7,7 +7,6 @@
   "rules": {
     "prettier/prettier": "warn",
     "no-console": "warn",
-    "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
-    "@next/next/no-html-link-for-pages": "off"
+    "no-unused-vars": "warn"
   }
 }

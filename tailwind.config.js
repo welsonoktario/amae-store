@@ -22,7 +22,6 @@ module.exports = {
     require('prettier-plugin-tailwindcss'),
   ],
   daisyui: {
-    themes: false,
     logs: false,
     themes: [
       {

@@ -3,6 +3,7 @@ import styles from './app-header.module.css';
 
 import { Menu, Popover, Transition } from '@headlessui/react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { Fragment } from 'react';
 
 /*
@@ -47,21 +48,12 @@ export default function AppNav() {
               {({ open }) => (
                 <>
                   <Popover.Button className={styles['nav-button']}>
-                    <svg
-                      className="h-6 w-6"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M5 20v-1a7 7 0 017-7v0a7 7 0 017 7v1M12 12a4 4 0 100-8 4 4 0 000 8z"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+                    <Image
+                      src="/img/icons/user.svg"
+                      alt="User menu"
+                      height="24"
+                      width="24"
+                    />
                   </Popover.Button>
                   {/* Use the `Transition` component. */}
                   <Transition
@@ -120,9 +112,7 @@ export default function AppNav() {
                       {({ active }) => (
                         <a
                           className={`${
-                            active
-                              ? 'bg-primary-1 text-white'
-                              : 'text-zinc-900'
+                            active ? 'bg-primary-1 text-white' : 'text-zinc-900'
                           } transition-color group flex w-full items-center rounded-md px-2 py-2 text-sm duration-100`}
                           href="#"
                         >
@@ -134,9 +124,7 @@ export default function AppNav() {
                       {({ active }) => (
                         <a
                           className={`${
-                            active
-                              ? 'bg-primary text-white'
-                              : 'text-zinc-900'
+                            active ? 'bg-primary text-white' : 'text-zinc-900'
                           } transition-color group mt-1 flex w-full items-center rounded-md px-2 py-2 text-sm duration-100`}
                           href="#"
                         >
@@ -148,9 +136,7 @@ export default function AppNav() {
                       {({ active }) => (
                         <a
                           className={`${
-                            active
-                              ? 'bg-primary text-white'
-                              : 'text-zinc-900'
+                            active ? 'bg-primary text-white' : 'text-zinc-900'
                           } transition-color group mt-1 flex w-full items-center rounded-md px-2 py-2 text-sm duration-100`}
                           href="#"
                         >
