@@ -19,7 +19,7 @@
 }
 
 .nav-search {
-  @apply relative hidden w-full md:inline-block col-span-4;
+  @apply relative col-span-4 hidden w-full md:inline-block;
 }
 
 .nav-search-sm {
