@@ -1,7 +1,8 @@
+import { clsx } from 'clsx';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
-import styles from './input-text.module.css';
+import styles from './form-input.module.css';
 
-interface InputTextProps
+interface FormInputProps
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -9,9 +10,11 @@ interface InputTextProps
   label: string;
 }
 
-const InputText = (props: InputTextProps) => {
+const FormInput = (props: FormInputProps) => {
+  const inputWrapperClasses = clsx([styles['input-wrapper']]);
+
   return (
-    <div className={styles['input-wrapper']}>
+    <div className={inputWrapperClasses}>
       <label className={styles['input-label']} htmlFor={props.name}>
         <span className={styles['input-label-text']}>{props.label}</span>
       </label>
@@ -27,4 +30,4 @@ const InputText = (props: InputTextProps) => {
   );
 };
 
-export default InputText;
+export default FormInput;

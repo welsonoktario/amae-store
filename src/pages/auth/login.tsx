@@ -1,5 +1,5 @@
-import InputCheckbox from '@/components/input-checkbox/input-checkbox';
-import InputText from '@/components/input-text/input-text';
+import FormCheckbox from '@/components/form-checkbox/form-checkbox';
+import FormInput from '@/components/form-input/form-input';
 import styles from '@styles/components/auth/auth.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ const Login = () => {
           <div className={styles['auth-form-content']}>
             <h1 className={styles['auth-title']}>Masuk</h1>
 
-            <InputText
+            <FormInput
               label="Email"
               name="email"
               placeholder="abc@gmail.com"
@@ -24,7 +24,7 @@ const Login = () => {
               required
             />
 
-            <InputText
+            <FormInput
               label="Password"
               name="password"
               placeholder="Password"
@@ -33,7 +33,7 @@ const Login = () => {
             />
 
             <div className={styles['auth-additional-wrapper']}>
-              <InputCheckbox>Ingat saya</InputCheckbox>
+              <FormCheckbox>Ingat saya</FormCheckbox>
 
               <Link href="/auth/register" className={styles['auth-link']}>
                 Lupa password?

@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
-import styles from './input-checkbox.module.css';
+import styles from './form-checkbox.module.css';
 
-interface InputCheckboxProps {
+interface FormCheckboxProps {
   children: ReactNode;
 }
 
-const InputCheckbox = (props: InputCheckboxProps) => {
+const FormCheckbox = (props: FormCheckboxProps) => {
   return (
     <div className={styles['checkbox-wrapper']}>
       <label className={styles['checkbox-content']}>
@@ -16,4 +16,4 @@ const InputCheckbox = (props: InputCheckboxProps) => {
   );
 };
 
-export default InputCheckbox;
+export default FormCheckbox;

@@ -1,6 +1,7 @@
 import Breadcrumbs, {
   BreadcrumbLink,
 } from '@/components/breadcrumbs/breadcrumbs';
+import SectionTopupStep from '@/components/section-topup-step/section-topup-step';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -28,7 +29,9 @@ export default function Game() {
 
       <div className="mt-4 grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12">
         <div className="col-span-full md:col-span-2 lg:col-span-3">halo</div>
-        <div className="col-span-full md:col-span-6 lg:col-span-9">halo2</div>
+        <div className="col-span-full md:col-span-6 lg:col-span-9">
+          <SectionTopupStep />
+        </div>
       </div>
     </>
   );

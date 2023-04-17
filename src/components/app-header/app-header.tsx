@@ -15,7 +15,7 @@ import { Fragment } from 'react';
 export default function AppNav() {
   const MenuProfile = dynamic(
     () => import('@components/menu-profile/menu-profile'),
-    { ssr: false }
+    { ssr: false },
   );
 
   const MenuAuth = dynamic(() => import('@components/menu-auth/menu-auth'), {

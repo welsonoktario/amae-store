@@ -11,5 +11,8 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "cssModules.camelCase": true
+  "cssModules.camelCase": true,
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }

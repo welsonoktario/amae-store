@@ -1,4 +1,4 @@
-import InputText from '@/components/input-text/input-text';
+import FormInput from '@/components/form-input/form-input';
 import styles from '@styles/components/auth/auth.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ const Register = () => {
           <div className={styles['auth-form-content']}>
             <h1 className={styles['auth-title']}>Daftar</h1>
 
-            <InputText
+            <FormInput
               label="Nama"
               name="nama"
               placeholder="John Doe"
@@ -23,7 +23,7 @@ const Register = () => {
               required
             />
 
-            <InputText
+            <FormInput
               label="Email"
               name="email"
               placeholder="abc@gmail.com"
@@ -31,7 +31,7 @@ const Register = () => {
               required
             />
 
-            <InputText
+            <FormInput
               label="No. HP"
               name="hp"
               placeholder="0812xxxxxxxx"
@@ -41,7 +41,7 @@ const Register = () => {
               required
             />
 
-            <InputText
+            <FormInput
               label="Password"
               name="password"
               placeholder="Password"

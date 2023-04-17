@@ -1,0 +1,8 @@
+.select-wrapper {
+  @apply rounded-btn h-12 w-full border border-base-content border-opacity-0 bg-base-100 font-semibold;
+}
+
+.select-wrapper:is(:focus) {
+  outline: 2px solid hsla(var(--bc) / 0.2);
+  outline-offset: 2px;
+}
