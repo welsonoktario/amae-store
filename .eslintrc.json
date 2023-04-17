@@ -1,17 +1,17 @@
 {
   "extends": [
     "eslint:recommended",
-    // "plugin:prettier/recommended",
+    "plugin:prettier/recommended",
     "next",
     "next/core-web-vitals",
     "plugin:@next/next/recommended"
   ],
-  // "plugins": ["prettier"],
+  "plugins": ["prettier"],
   "globals": {
     "React": "readonly"
   },
   "rules": {
-    // "prettier/prettier": "warn",
+    "prettier/prettier": "warn",
     "no-console": "warn",
     "no-unused-vars": "warn"
   }
