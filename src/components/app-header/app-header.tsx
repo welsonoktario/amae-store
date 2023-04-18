@@ -6,6 +6,8 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Fragment } from 'react';
 
+import UserIcon from '@/assets/icons/user.svg';
+
 /*
   TODO:
 
@@ -48,12 +50,7 @@ export default function AppNav() {
               {({ open }) => (
                 <>
                   <Popover.Button className={styles['nav-button']}>
-                    <Image
-                      src="/img/icons/user.svg"
-                      alt="User menu"
-                      height="24"
-                      width="24"
-                    />
+                    <UserIcon className="h-6 w-6 stroke-2" />
                   </Popover.Button>
                   {/* Use the `Transition` component. */}
                   <Transition

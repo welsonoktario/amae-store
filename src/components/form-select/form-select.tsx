@@ -61,7 +61,7 @@ const FormSelect = (props: FormSelectProps) => {
                     </span>
                     {selected ? (
                       <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary">
-                        <CheckIcon />
+                        <CheckIcon className="h-5 w-5 stroke-2" />
                       </span>
                     ) : null}
                   </>

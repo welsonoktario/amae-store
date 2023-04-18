@@ -1,24 +1,10 @@
-import FormInput from '@/components/form-input/form-input';
-import FormSelect, {
-  FormSelectOption,
-} from '@/components/form-select/form-select';
+import { ReactNode } from 'react';
 
-const options: FormSelectOption[] = [
-  {
-    value: 'sea',
-    label: 'SEA',
-  },
-  {
-    value: 'eu',
-    label: 'EU',
-  },
-  {
-    value: 'na',
-    label: 'NA',
-  },
-];
+export interface SectionTopupStepProps {
+  children: ReactNode;
+}
 
-const SectionTopupStep = () => {
+const SectionTopupStep = (props: SectionTopupStepProps) => {
   return (
     <section className="rounded-lg bg-primary-2">
       <div className="inline-flex w-full items-center gap-4 text-xl font-bold">
@@ -28,9 +14,7 @@ const SectionTopupStep = () => {
         <p>Detail User</p>
       </div>
       <div className="inline-flex w-full items-center gap-4 p-6">
-        <FormInput label="User ID" />
-        <FormInput label="Server" type="tel" pattern="[0-9]*" />
-        <FormSelect name="server" options={options} />
+        {props.children}
       </div>
     </section>
   );
