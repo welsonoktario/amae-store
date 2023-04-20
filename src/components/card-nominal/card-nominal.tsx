@@ -18,8 +18,10 @@ const CardNominal = (props: CardNominalProps) => {
 
   return (
     <div className={cardWrapper} onClick={() => setSelectedNominal(props.id)}>
-      <p className="font-medium">{props.label}</p>
-      <p className="text-xl font-bold">{formatRupiah(props.price)}</p>
+      <p className="text-sm font-medium">{props.label}</p>
+      <p className="text-sm font-bold md:text-lg">
+        {formatRupiah(props.price)}
+      </p>
     </div>
   );
 };
