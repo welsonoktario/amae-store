@@ -1,19 +1,14 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "[typescriptreact]": {
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": false,
-      "source.fixAll.eslint": false,
-      "source.fixAll": false
-    }
-  },
-  "files.associations": {
-    "*.css": "tailwindcss"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   },
   "cssModules.camelCase": true,
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ],
-  "exportall.config.folderListener": ["/src/components"]
+  ]
 }
