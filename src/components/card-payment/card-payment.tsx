@@ -19,11 +19,14 @@ const CardPayment = (props: CardPaymentProps) => {
   const setSelectedPayment = useStore((state) => state.setSelectedPayment);
 
   return (
-    <div className={cardWrapper} onClick={() => setSelectedPayment(props.id)}>
+    <div className={cardWrapper} onClick={() => setSelectedPayment(props)}>
       <Image src={props.img} alt={props.name} height={64} width={64} />
-      <p className="text-sm font-bold md:text-lg">
-        {formatRupiah(props.nominal)}
-      </p>
+      <div>
+        <p className="block">{props.name}</p>
+        <p className="block text-sm font-bold md:text-lg">
+          {formatRupiah(props.nominal)}
+        </p>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './card-game.module.css';
 
-interface CardGameProps {
+export interface CardGameProps {
   thumbnail: string;
   title: string;
 }

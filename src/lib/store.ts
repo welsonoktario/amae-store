@@ -1,15 +1,18 @@
+import { CardNominalProps } from '@/components/card-nominal/card-nominal';
+import { CardPaymentProps } from '@/components/card-payment/card-payment';
 import { create } from 'zustand';
 
 export interface StoreState {
-  selectedNominal: number | undefined;
-  setSelectedNominal: (id: number) => void;
-  selectedPayment: number | undefined;
-  setSelectedPayment: (id: number) => void;
+  selectedNominal: CardNominalProps | undefined;
+  setSelectedNominal: (nominal: CardNominalProps) => void;
+  selectedPayment: CardPaymentProps | undefined;
+  setSelectedPayment: (payment: CardPaymentProps) => void;
 }
 
 export const useStore = create<StoreState>((set) => ({
   selectedNominal: undefined,
-  setSelectedNominal: (id) => set(() => ({ selectedNominal: id })),
+  setSelectedNominal: (nominal: CardNominalProps) =>
+    set(() => ({ selectedNominal: nominal })),
   selectedPayment: undefined,
-  setSelectedPayment: (id) => set(() => ({ selectedPayment: id })),
+  setSelectedPayment: (payment) => set(() => ({ selectedPayment: payment })),
 }));

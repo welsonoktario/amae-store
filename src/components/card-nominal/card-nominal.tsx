@@ -17,7 +17,7 @@ const CardNominal = (props: CardNominalProps) => {
   const setSelectedNominal = useStore((state) => state.setSelectedNominal);
 
   return (
-    <div className={cardWrapper} onClick={() => setSelectedNominal(props.id)}>
+    <div className={cardWrapper} onClick={() => setSelectedNominal(props)}>
       <p className="text-sm font-medium">{props.label}</p>
       <p className="text-sm font-bold md:text-lg">
         {formatRupiah(props.price)}

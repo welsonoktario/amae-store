@@ -14,5 +14,6 @@
   "cssModules.camelCase": true,
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ]
+  ],
+  "exportall.config.folderListener": ["/src/components"]
 }
