@@ -4,7 +4,7 @@
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
-    "plugin:prettier/recommended"
+    "prettier"
   ],
   "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
@@ -16,7 +16,6 @@
     "project": ["tsconfig.json"]
   },
   "rules": {
-    "prettier/prettier": "warn",
     "no-console": "warn",
     "no-unused-vars": "warn"
   }
