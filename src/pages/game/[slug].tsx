@@ -17,6 +17,7 @@ import { useStore } from '@/lib/store';
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { unslugify } from '@lib/utils/unslugify';
 
 interface GamePageProps {
   game: CardGameInfoProps;
@@ -124,11 +125,12 @@ export default function Game({
       active: true,
     },
   ];
+  const pageTitle = unslugify(slug as string);
 
   return (
     <>
       <Head>
-        <title>Top Up {slug} | Amae Store</title>
+        <title>Top Up {pageTitle} | Amae Store</title>
       </Head>
       <Breadcrumbs links={links} />
 
@@ -158,10 +160,10 @@ export default function Game({
             <div className="grid grid-cols-2 gap-4 p-6 md:grid-cols-4">
               {nominals.map((nominal) => (
                 <CardNominal
+                  key={`nominal-${nominal.id}`}
                   id={nominal.id}
                   label={nominal.label}
                   price={nominal.price}
-                  key={nominal.id}
                   checked={nominal.id === selectedNominal?.id}
                 />
               ))}
@@ -184,11 +186,11 @@ export default function Game({
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {payments.map((payment) => (
                       <CardPayment
+                        key={`payment-${payment.id}`}
                         id={payment.id}
                         img={payment.img}
                         name={payment.name}
                         nominal={selectedNominal ? selectedNominal.price : 0}
-                        key={payment.id}
                         checked={payment.id === selectedPayment?.id}
                       />
                     ))}
