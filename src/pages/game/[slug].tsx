@@ -134,7 +134,7 @@ export default function Game({
       </Head>
       <Breadcrumbs links={links} />
 
-      <div className="mt-4 grid grid-cols-1 gap-y-8 lg:grid-cols-12 lg:gap-8">
+      <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-12 lg:gap-8">
         <div className="col-span-full lg:col-span-3">
           <CardGameInfo
             thumbnail={game.thumbnail}

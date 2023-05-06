@@ -131,14 +131,14 @@ export default function AppNav() {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
+                        <Link
                           className={`${
                             active ? 'bg-primary text-white' : 'text-zinc-900'
                           } transition-color group mt-1 flex w-full items-center rounded-md px-2 py-2 text-sm duration-100`}
-                          href="#"
+                          href="/news"
                         >
                           Berita & Promo
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                   </div>

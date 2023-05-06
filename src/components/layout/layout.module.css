@@ -7,5 +7,5 @@
 }
 
 .content-wrapper {
-  @apply container mx-auto px-4 pb-6 pt-36 md:px-8 md:pt-20 lg:pb-8 lg:pt-28;
+  @apply container mx-auto px-4 pb-6 pt-36 md:px-8 md:pt-20 lg:pb-8 lg:pt-32;
 }
