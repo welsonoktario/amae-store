@@ -34,7 +34,7 @@ export default function NewsDetail({ article }: { article: ArticleType }) {
       </Head>
 
       <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4 lg:gap-6">
-        <article className="card bg-base-100 shadow-xl md:col-span-3">
+        <article className="card bg-base-100 md:col-span-3">
           <figure className="relative aspect-video w-full overflow-hidden">
             <Image
               src="https://picsum.photos/1000/500"

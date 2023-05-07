@@ -13,7 +13,7 @@ export default function CardArticle(props: ArticleType) {
 
   return (
     <Link href={`/news/${slug}`}>
-      <article className="card bg-base-100 shadow-xl">
+      <article className="card bg-base-100 shadow-xl hover:scale-[1.01] hover:shadow-primary-2 transition-all duration-200 ease-in-out">
         <figure className="relative h-64 w-full overflow-hidden">
           <Image
             src="https://picsum.photos/500/300"

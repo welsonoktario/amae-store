@@ -1,9 +1,12 @@
+import withTransition from '@/components/with-transition/with-transition';
 import Layout from '@components/layout/layout';
-import '@styles/global.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import '@styles/global.css';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const Screen = withTransition(Component);
+
   return (
     <>
       <Head>
@@ -13,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Layout>
-        <Component {...pageProps} />
+        <Screen {...pageProps} />
       </Layout>
     </>
   );
