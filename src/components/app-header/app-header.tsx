@@ -63,8 +63,8 @@ export default function AppNav() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Popover.Panel className="absolute right-0 mt-2 min-w-[35vw] rounded-xl bg-primary-2 shadow-lg lg:min-w-[25vw]">
-                      {/* <MenuProfile /> */}
-                      <MenuAuth />
+                      <MenuProfile />
+                      {/* <MenuAuth /> */}
                     </Popover.Panel>
                   </Transition>
                 </>
@@ -93,7 +93,6 @@ export default function AppNav() {
                 </svg>
               </Menu.Button>
 
-              {/* Use the `Transition` component. */}
               <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"
