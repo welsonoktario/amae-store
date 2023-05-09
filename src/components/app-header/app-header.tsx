@@ -29,7 +29,7 @@ export default function AppNav() {
       <nav className={styles.nav}>
         <div className={styles['nav-wrapper']}>
           <Link href="/" className={styles['nav-title']}>
-            Amae Store
+            Amae Group
           </Link>
 
           <div className={styles['nav-search']}>
