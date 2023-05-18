@@ -1,44 +1,125 @@
+import { clsx } from 'clsx';
+import Autoplay from 'embla-carousel-autoplay';
+import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
-import { EffectCoverflow, Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './carousel.module.css';
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 interface CarouseItemProps {
   images: string[];
 }
 
-export default function Carousel({ images }: CarouseItemProps) {
+interface CarouselDotsProps {
+  itemsLength: number;
+  selectedIndex: number;
+}
+
+const CarouselDots = ({ itemsLength, selectedIndex }: CarouselDotsProps) => {
+  const arr = new Array(itemsLength).fill(0);
   return (
-    <Swiper
-      modules={[Navigation, Pagination, EffectCoverflow]}
-      className={styles.carousel}
-      spaceBetween={16}
-      slidesPerView={1}
-      effect="coverflow"
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
-      autoplay={{
-        delay: 3000,
-      }}
-      loop
-      navigation
-    >
-      {images.map((image, i) => (
-        <SwiperSlide className={styles['carouse-item']} key={`carousel-${i}`}>
-          <Image
-            className="rounded-lg"
-            src={image}
-            alt="img-1"
-            fill
-            priority
-            sizes="100vw"
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className="flex -translate-y-5 justify-center gap-1">
+      {arr.map((_, index) => {
+        const selected = index === selectedIndex;
+        return (
+          <div
+            className={clsx({
+              'h-2 w-2 rounded-full bg-primary transition-all duration-300':
+                true,
+              // tune down the opacity if slide is not selected
+              'opacity-50': !selected,
+            })}
+            key={index}
+          ></div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default function Carousel({ images }: CarouseItemProps) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    function selectHandler() {
+      // selectedScrollSnap gives us the current selected index.
+      const index = emblaApi?.selectedScrollSnap();
+      setSelectedIndex(index || 0);
+    }
+
+    emblaApi?.on('select', selectHandler);
+    // cleanup
+    return () => {
+      emblaApi?.off('select', selectHandler);
+    };
+  }, [emblaApi]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  return (
+    <div className="embla relative">
+      <div className={styles.carousel} ref={emblaRef}>
+        <div className={styles['carousel-container']}>
+          {images.map((image, i) => (
+            <div className={styles['carousel-item']} key={`carousel-${i}`}>
+              <Image src={image} alt="img-1" fill priority sizes="100vw" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <CarouselDots itemsLength={images.length} selectedIndex={selectedIndex} />
+
+      <button
+        className={`embla__prev ${styles['carousel-prev']}`}
+        onClick={scrollPrev}
+      >
+        <svg
+          width="31px"
+          height="31px"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          color="#5ebf39"
+        >
+          <path
+            d="M15 6l-6 6 6 6"
+            stroke="#5ebf39"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </button>
+      <button
+        className={`embla__next ${styles['carousel-next']}`}
+        onClick={scrollNext}
+      >
+        <svg
+          width="31px"
+          height="31px"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          color="#5ebf39"
+        >
+          <path
+            d="M9 6l6 6-6 6"
+            stroke="#5ebf39"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </button>
+    </div>
   );
 }
