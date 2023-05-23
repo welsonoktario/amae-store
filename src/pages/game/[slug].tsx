@@ -130,7 +130,7 @@ export default function Game({
   return (
     <>
       <Head>
-        <title>Top Up {pageTitle} | Amae Store</title>
+        <title>Top Up {pageTitle} | Amae Group</title>
       </Head>
       <Breadcrumbs links={links} />
 

@@ -1,9 +1,9 @@
 .header {
-  @apply fixed inset-x-0 top-0 z-50 bg-base-100;
+  @apply fixed inset-x-0 top-0 z-[60] bg-base-100;
 }
 
 .nav {
-  @apply container mx-auto flex flex-col px-4 py-4 md:flex-row lg:px-8 lg:py-8;
+  @apply container mx-auto flex flex-col px-4 py-4 md:flex-row lg:px-8 lg:py-4;
 }
 
 .nav-wrapper {
@@ -14,8 +14,12 @@
   @apply flex flex-col items-center md:hidden;
 }
 
-.nav-title {
-  @apply whitespace-nowrap text-xl font-bold normal-case text-primary;
+.nav-logo {
+  @apply relative h-14 w-14 md:h-20 md:w-20;
+}
+
+.nav-logo-img {
+  @apply object-contain;
 }
 
 .nav-search {
@@ -23,7 +27,7 @@
 }
 
 .nav-search-sm {
-  @apply relative mt-4 inline-flex w-full md:hidden;
+  @apply relative mt-2 inline-flex w-full md:hidden;
 }
 
 .nav-search-icon {

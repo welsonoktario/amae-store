@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 
 import UserIcon from '@/assets/icons/user.svg';
+import logo from '@/assets/logo.png';
 
 /*
   TODO:
@@ -28,8 +29,15 @@ export default function AppNav() {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles['nav-wrapper']}>
-          <Link href="/" className={styles['nav-title']}>
-            Amae Group
+          <Link href="/" className={styles['nav-logo']}>
+            <Image
+              className={styles['nav-logo-img']}
+              src={logo}
+              alt="Amae Group"
+              fill
+              priority
+              sizes="10vw"
+            />
           </Link>
 
           <div className={styles['nav-search']}>
@@ -47,7 +55,7 @@ export default function AppNav() {
               as="div"
               className="relative z-50 inline-block justify-self-end text-left"
             >
-              {({ open }) => (
+              {() => (
                 <>
                   <Popover.Button className={styles['nav-button']}>
                     <UserIcon className="h-6 w-6 stroke-2" />

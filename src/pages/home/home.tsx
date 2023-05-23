@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Amae Store</title>
+        <title>Amae Group</title>
       </Head>
 
       <section>

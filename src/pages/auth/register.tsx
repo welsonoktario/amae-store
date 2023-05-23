@@ -7,7 +7,7 @@ const Register = () => {
   return (
     <>
       <Head>
-        <title>Daftar | Amae Store</title>
+        <title>Daftar | Amae Group</title>
       </Head>
 
       <div className={styles['auth-wrapper']}>

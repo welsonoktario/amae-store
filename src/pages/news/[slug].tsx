@@ -30,7 +30,7 @@ export default function NewsDetail({ article }: { article: ArticleType }) {
   return (
     <>
       <Head>
-        <title>{article.title} | Amae Store</title>
+        <title>{article.title} | Amae Group</title>
       </Head>
 
       <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4 lg:gap-6">

@@ -61,7 +61,7 @@ export default function News({ articles }: { articles: ArticleType[] }) {
   return (
     <>
       <Head>
-        <title>Berita &amp; Promo | Amae Store</title>
+        <title>Berita &amp; Promo | Amae Group</title>
       </Head>
 
       <h1 className="mb-6 text-2xl font-bold">Berita &amp; Promo</h1>

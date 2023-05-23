@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Login | Amae Store</title>
+        <title>Login | Amae Group</title>
       </Head>
 
       <div className={styles['auth-wrapper']}>
