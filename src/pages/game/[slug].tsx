@@ -125,12 +125,12 @@ export default function Game({
       active: true,
     },
   ];
-  const pageTitle = unslugify(slug as string);
+  const pageTitle = `Top Up ${unslugify(slug as string)} | Amae Group`;
 
   return (
     <>
       <Head>
-        <title>Top Up {pageTitle} | Amae Group</title>
+        <title>{pageTitle}</title>
       </Head>
       <Breadcrumbs links={links} />
 
