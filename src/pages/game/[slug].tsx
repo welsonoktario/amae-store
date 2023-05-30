@@ -14,10 +14,14 @@ import FormInput from '@/components/form-input/form-input';
 import FormSelect from '@/components/form-select/form-select';
 import SectionTopupStep from '@/components/section-topup-step/section-topup-step';
 import { useStore } from '@/lib/store';
+import { formatRupiah } from '@/lib/utils';
+import { unslugify } from '@lib/utils/unslugify';
+import { doc } from 'firebase/firestore';
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { unslugify } from '@lib/utils/unslugify';
+import { useEffect, useState } from 'react';
+import { useFirestore, useFirestoreDocDataOnce } from 'reactfire';
 
 interface GamePageProps {
   game: CardGameInfoProps;
@@ -108,11 +112,61 @@ export default function Game({
   payments,
 }: GamePageProps) {
   const router = useRouter();
+  const fireStore = useFirestore();
   const { slug } = router.query;
+
   const [selectedNominal, selectedPayment] = useStore((state: any) => [
     state.selectedNominal,
     state.selectedPayment,
   ]);
+  const [produks, setProduks] = useState<any>([]);
+
+  const produkRef = doc(fireStore, 'Produk', 'MLBB');
+  const { status, data } = useFirestoreDocDataOnce(produkRef);
+
+  useEffect(() => {
+    if (!produks.length) {
+      if (status === 'success') {
+        const prioritas = data.prioritas.find(
+          (prio: { prioritas: any }) => prio.prioritas === data.currentPrio,
+        );
+
+        for (const prop in data) {
+          if (Object.prototype.hasOwnProperty.call(data[prop], 'Publik')) {
+            if (prop == prioritas.nama) {
+              setProduks(() => {
+                const newState = data[prop]['Publik']
+                  .sort((a: { harga: number }, b: { harga: number }) => {
+                    if (a.harga < b.harga) {
+                      return -1;
+                    }
+                    if (a.harga > b.harga) {
+                      return 1;
+                    }
+                    return 0;
+                  })
+                  .map((d: { label: string; harga: any; subHarga: any }) => {
+                    const newD = {
+                      ...d,
+                      label: d.label.replace(
+                        '{harga}->{subHarga}',
+                        `${formatRupiah(d.harga)} -> ${formatRupiah(
+                          d.subHarga,
+                        )}}`,
+                      ),
+                    };
+
+                    return newD;
+                  });
+
+                return newState;
+              });
+            }
+          }
+        }
+      }
+    }
+  }, [status, produks]);
 
   const links: BreadcrumbLink[] = [
     {
@@ -142,64 +196,66 @@ export default function Game({
             tutorial={game.tutorial}
           />
         </div>
-        <div className="col-span-full lg:col-span-9">
-          <SectionTopupStep step={1} title="Detail User">
-            <div className="inline-flex w-full items-center gap-4 p-6">
-              <FormInput placeholder="Masukkan ID" label="User ID" />
-              {servers ? (
-                <FormSelect name="server" options={servers} />
-              ) : (
-                <FormInput label="Server" type="tel" pattern="[0-9]*" />
-              )}
-            </div>
-          </SectionTopupStep>
+        {status === 'loading' ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="col-span-full lg:col-span-9">
+            <SectionTopupStep step={1} title="Detail User">
+              <div className="inline-flex w-full items-center gap-4 p-6">
+                <FormInput placeholder="Masukkan ID" label="User ID" />
+                {servers ? (
+                  <FormSelect name="server" options={servers} />
+                ) : (
+                  <FormInput label="Server" type="tel" pattern="[0-9]*" />
+                )}
+              </div>
+            </SectionTopupStep>
 
-          <div className="divider" />
+            <div className="divider" />
 
-          <SectionTopupStep step={2} title="Pilihan Nominal">
-            <div className="grid grid-cols-2 gap-4 p-6 md:grid-cols-4">
-              {nominals.map((nominal) => (
-                <CardNominal
-                  key={`nominal-${nominal.id}`}
-                  id={nominal.id}
-                  label={nominal.label}
-                  price={nominal.price}
-                  checked={nominal.id === selectedNominal?.id}
-                />
-              ))}
-            </div>
-          </SectionTopupStep>
+            <SectionTopupStep step={2} title="Pilihan Nominal">
+              <div className="grid grid-cols-2 gap-4 p-6 md:grid-cols-4">
+                {produks.map((produk: any, i: number) => (
+                  <CardNominal
+                    key={`nominal-${produk.idProduk + i}`}
+                    checked={produk.idProduk === selectedNominal?.idProduk}
+                    {...produk}
+                  />
+                ))}
+              </div>
+            </SectionTopupStep>
 
-          <div className="divider" />
+            <div className="divider" />
 
-          <SectionTopupStep step={3} title="Metode Pembayaran">
-            <div className="p-6">
-              <div
-                tabIndex={0}
-                className="collapse-arrow rounded-box collapse bg-primary-1"
-              >
-                <input type="checkbox" className="peer" />
-                <div className="collapse-title text-xl font-medium">
-                  Virtual Account
-                </div>
-                <div className="collapse-content">
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {payments.map((payment) => (
-                      <CardPayment
-                        key={`payment-${payment.id}`}
-                        id={payment.id}
-                        img={payment.img}
-                        name={payment.name}
-                        nominal={selectedNominal ? selectedNominal.price : 0}
-                        checked={payment.id === selectedPayment?.id}
-                      />
-                    ))}
+            <SectionTopupStep step={3} title="Metode Pembayaran">
+              <div className="p-6">
+                <div
+                  tabIndex={0}
+                  className="collapse-arrow rounded-box collapse bg-primary-1"
+                >
+                  <input type="checkbox" className="peer" />
+                  <div className="collapse-title text-xl font-medium">
+                    Virtual Account
+                  </div>
+                  <div className="collapse-content">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      {payments.map((payment, i) => (
+                        <CardPayment
+                          key={`payment-${payment.id}`}
+                          id={payment.id}
+                          img={payment.img}
+                          name={payment.name}
+                          nominal={selectedNominal ? selectedNominal.harga : 0}
+                          checked={payment.id === selectedPayment?.id}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </SectionTopupStep>
-        </div>
+            </SectionTopupStep>
+          </div>
+        )}
       </div>
     </>
   );
