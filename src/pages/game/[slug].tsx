@@ -152,7 +152,7 @@ export default function Game({
                         '{harga}->{subHarga}',
                         `${formatRupiah(d.harga)} -> ${formatRupiah(
                           d.subHarga,
-                        )}}`,
+                        )}`,
                       ),
                     };
 
