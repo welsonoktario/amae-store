@@ -132,7 +132,7 @@ export default function Game({
         );
 
         for (const prop in data) {
-          if (Object.prototype.hasOwnProperty.call(data[prop], 'Publik')) {
+          if (Object.hasOwn(data[prop], 'Publik')) {
             if (prop == prioritas.nama) {
               setProduks(() => {
                 const newState = data[prop]['Publik']

@@ -28,7 +28,7 @@ export default function SectionTopUp() {
         Top Up Game
       </p>
 
-      <div className="grid grid-cols-3 justify-items-stretch gap-4 rounded-lg md:grid-cols-5">
+      <div className="grid grid-cols-3 justify-items-stretch gap-4 rounded-lg md:flex md:justify-center">
         {games.map((game, i) => (
           <CardGame
             title={game.title}

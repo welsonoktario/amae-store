@@ -1,5 +1,5 @@
 .card-game {
-  @apply rounded-lg bg-primary-2 p-2 transition-all duration-150 hover:shadow-lg;
+  @apply rounded-lg bg-primary-2 p-2 transition-all duration-150 hover:shadow-lg md:w-44;
 }
 
 .card-game-img-wrapper {
@@ -7,7 +7,7 @@
 }
 
 .card-game-img {
-  @apply h-full w-full object-contain;
+  @apply object-contain;
 }
 
 .card-game-title {

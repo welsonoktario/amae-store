@@ -1,5 +1,5 @@
 .carousel {
-  @apply overflow-hidden lg:mt-4;
+  @apply overflow-hidden md:mt-10 lg:mt-4;
 }
 
 .carousel-container {
@@ -7,7 +7,7 @@
 }
 
 .carousel-item {
-  @apply relative mx-2 h-56 md:h-72 lg:h-96;
+  @apply relative mx-2 h-40 md:h-72 lg:h-96;
   flex: 0 0 100%;
 }
 
