@@ -180,7 +180,7 @@ export default function Game({ game, servers, payments }: GamePageProps) {
         ) : (
           <div className="col-span-full lg:col-span-9">
             <SectionTopupStep step={1} title="Detail User">
-              <div className="inline-flex w-full items-center gap-4 p-6">
+              <div className="inline-flex w-full items-center gap-2 p-6 md:gap-4">
                 <FormInput placeholder="Masukkan ID" label="User ID" />
                 {servers ? (
                   <FormSelect name="server" options={servers} />
@@ -193,9 +193,24 @@ export default function Game({ game, servers, payments }: GamePageProps) {
                   />
                 )}
 
-                <Popover>
-                  <Popover.Button className="btn-ghost btn mt-auto">
-                    Cara Topup
+                <Popover className="relative mb-2 mt-auto">
+                  <Popover.Button className="btn-ghost btn-sm btn-circle btn aspect-square">
+                    <svg
+                      className="h-4 w-4 md:h-5 md:w-5"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      color="currentColor"
+                    >
+                      <path
+                        d="M7.9 8.08c0-4.773 7.5-4.773 7.5 0 0 3.409-3.409 2.727-3.409 6.818M12 19.01l.01-.011"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
                   </Popover.Button>
 
                   <Transition
@@ -206,12 +221,12 @@ export default function Game({ game, servers, payments }: GamePageProps) {
                     leaveFrom="transform scale-100 opacity-100"
                     leaveTo="transform scale-95 opacity-0"
                   >
-                    <Popover.Panel className="absolute">
+                    <Popover.Panel className="absolute hidden md:block">
                       <Image
                         className="mt-4 rounded-lg shadow-sm"
                         src="https://picsum.photos/300/150"
                         width={300}
-                        height="120"
+                        height={120}
                         alt="Cara Topup"
                       />
                     </Popover.Panel>
