@@ -1,4 +1,7 @@
+import clsx from 'clsx';
 import CardGame from '../card-game/card-game';
+import { useWindowSize } from '@/hooks';
+import { chunk } from '@/lib/utils/chunk';
 
 const games = [
   {
@@ -22,21 +25,53 @@ const games = [
 ];
 
 export default function SectionTopUp() {
+  const { width } = useWindowSize();
+  console.log(chunk(games, 1));
+
   return (
     <section className="mt-8">
       <p className="mb-4 block font-bold uppercase underline decoration-primary underline-offset-4">
         Top Up Game
       </p>
 
-      <div className="grid grid-cols-3 justify-items-stretch gap-4 rounded-lg md:flex md:justify-center">
-        {games.map((game, i) => (
-          <CardGame
-            title={game.title}
-            thumbnail={game.thumbnail}
-            key={`game-${i}`}
-          />
-        ))}
-      </div>
+      {width &&
+        width < 786 &&
+        chunk(games, 3).map((chunk, i) => {
+          return (
+            <div
+              className="flex items-center justify-center gap-4"
+              key={`chunk-${i}`}
+            >
+              {chunk.map((game) => (
+                <CardGame
+                  key={game.id}
+                  thumbnail={game.thumbnail}
+                  title={game.title}
+                  className="flex-1"
+                />
+              ))}
+            </div>
+          );
+        })}
+
+      {width &&
+        width >= 786 &&
+        chunk(games, 6).map((chunk, i) => {
+          return (
+            <div
+              className="flex items-center justify-center gap-4"
+              key={`chunk-${i}`}
+            >
+              {chunk.map((game) => (
+                <CardGame
+                  key={game.id}
+                  thumbnail={game.thumbnail}
+                  title={game.title}
+                />
+              ))}
+            </div>
+          );
+        })}
     </section>
   );
 }

@@ -12,9 +12,9 @@ import CardPayment, {
 } from '@/components/card-payment/card-payment';
 import FormInput from '@/components/form-input/form-input';
 import FormSelect from '@/components/form-select/form-select';
+import { ModalDialog } from '@/components/modal-dialog/modal-dialog';
 import SectionTopupStep from '@/components/section-topup-step/section-topup-step';
 import { useStore } from '@/lib/store';
-import { formatRupiah } from '@/lib/utils';
 import { unslugify } from '@lib/utils/unslugify';
 import { doc } from 'firebase/firestore';
 import type { GetServerSideProps } from 'next';
@@ -22,6 +22,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useFirestore, useFirestoreDocDataOnce } from 'reactfire';
+import { Popover, Transition } from '@headlessui/react';
+import Image from 'next/image';
 
 interface GamePageProps {
   game: CardGameInfoProps;
@@ -46,20 +48,6 @@ export const getServerSideProps: GetServerSideProps<any> = async () => {
             'Diamonds akan ditambahkan ke akun Mobile Legends kamu secara otomatis',
           ],
         },
-        servers: [
-          {
-            value: 'sea',
-            label: 'SEA',
-          },
-          {
-            value: 'eu',
-            label: 'EU',
-          },
-          {
-            value: 'na',
-            label: 'NA',
-          },
-        ],
         nominals: [
           {
             id: 1,
@@ -105,12 +93,7 @@ export const getServerSideProps: GetServerSideProps<any> = async () => {
   return { props: data };
 };
 
-export default function Game({
-  game,
-  servers,
-  nominals,
-  payments,
-}: GamePageProps) {
+export default function Game({ game, servers, payments }: GamePageProps) {
   const router = useRouter();
   const fireStore = useFirestore();
   const { slug } = router.query;
@@ -120,6 +103,7 @@ export default function Game({
     state.selectedPayment,
   ]);
   const [produks, setProduks] = useState<any>([]);
+  const [open, setOpen] = useState<boolean>(false);
 
   const produkRef = doc(fireStore, 'Produk', 'MLBB');
   const { status, data } = useFirestoreDocDataOnce(produkRef);
@@ -148,12 +132,7 @@ export default function Game({
                   .map((d: { label: string; harga: any; subHarga: any }) => {
                     const newD = {
                       ...d,
-                      label: d.label.replace(
-                        '{harga}->{subHarga}',
-                        `${formatRupiah(d.harga)} -> ${formatRupiah(
-                          d.subHarga,
-                        )}`,
-                      ),
+                      label: d.label.replace(' | {harga}->{subHarga}', ``),
                     };
 
                     return newD;
@@ -206,8 +185,38 @@ export default function Game({
                 {servers ? (
                   <FormSelect name="server" options={servers} />
                 ) : (
-                  <FormInput label="Server" type="tel" pattern="[0-9]*" />
+                  <FormInput
+                    label="Server"
+                    placeholder="Masukkan server"
+                    type="tel"
+                    pattern="[0-9]*"
+                  />
                 )}
+
+                <Popover>
+                  <Popover.Button className="btn-ghost btn mt-auto">
+                    Cara Topup
+                  </Popover.Button>
+
+                  <Transition
+                    enter="transition duration-100 ease-out"
+                    enterFrom="transform scale-95 opacity-0"
+                    enterTo="transform scale-100 opacity-100"
+                    leave="transition duration-75 ease-out"
+                    leaveFrom="transform scale-100 opacity-100"
+                    leaveTo="transform scale-95 opacity-0"
+                  >
+                    <Popover.Panel className="absolute">
+                      <Image
+                        className="mt-4 rounded-lg shadow-sm"
+                        src="https://picsum.photos/300/150"
+                        width={300}
+                        height="120"
+                        alt="Cara Topup"
+                      />
+                    </Popover.Panel>
+                  </Transition>
+                </Popover>
               </div>
             </SectionTopupStep>
 
@@ -254,9 +263,56 @@ export default function Game({
                 </div>
               </div>
             </SectionTopupStep>
+
+            <div className="divider" />
+
+            <SectionTopupStep step={4} title="Kode Promo (opsional)">
+              <div className="p-6">
+                <FormInput placeholder="XXXX" label="Kode Promo" />
+              </div>
+            </SectionTopupStep>
+
+            <div className="divider" />
+
+            <SectionTopupStep step={5} title="Email (opsional)">
+              <div className="p-6">
+                <FormInput
+                  placeholder="email@gmail.com"
+                  label="Email"
+                  type="email"
+                />
+              </div>
+            </SectionTopupStep>
+
+            <div className="flex w-full justify-end">
+              <button
+                className="btn-primary btn mt-8"
+                onClick={() => setOpen(true)}
+              >
+                Bayar
+              </button>
+            </div>
           </div>
         )}
       </div>
+
+      <ModalDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Konfirmasi Pesanan"
+        footer={<button className="btn-primary btn">Bayar</button>}
+      >
+        <table>
+          <tr>
+            <td>Metode Pembayaran:</td>
+            <td>{selectedPayment?.name}</td>
+          </tr>
+          <tr>
+            <td>Total Transaksi:</td>
+            <td>{selectedNominal?.harga}</td>
+          </tr>
+        </table>
+      </ModalDialog>
     </>
   );
 }
