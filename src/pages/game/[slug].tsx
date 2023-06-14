@@ -176,11 +176,17 @@ export default function Game({ game, servers, payments }: GamePageProps) {
           />
         </div>
         {status === 'loading' ? (
-          <p>Loading...</p>
+          <div className="col-span-full lg:col-span-9">
+            <div className="flex h-full w-full items-center justify-center ">
+              <button className="btn-xl loading btn-ghost btn text-primary">
+                <span className="loading-spinner loading-lg loading"></span>
+              </button>
+            </div>
+          </div>
         ) : (
           <div className="col-span-full lg:col-span-9">
             <SectionTopupStep step={1} title="Detail User">
-              <div className="inline-flex w-full items-center gap-2 p-6 md:gap-4">
+              <div className="inline-flex w-full items-center gap-2 px-6 pt-6 md:gap-4">
                 <FormInput placeholder="Masukkan ID" label="User ID" />
                 {servers ? (
                   <FormSelect name="server" options={servers} />
@@ -194,7 +200,7 @@ export default function Game({ game, servers, payments }: GamePageProps) {
                 )}
 
                 <Popover className="relative mb-2 mt-auto">
-                  <Popover.Button className="btn-ghost btn-sm btn-circle btn aspect-square">
+                  <Popover.Button className="btn-primary btn-sm btn-circle btn aspect-square">
                     <svg
                       className="h-4 w-4 md:h-5 md:w-5"
                       stroke-width="2"
@@ -221,7 +227,7 @@ export default function Game({ game, servers, payments }: GamePageProps) {
                     leaveFrom="transform scale-100 opacity-100"
                     leaveTo="transform scale-95 opacity-0"
                   >
-                    <Popover.Panel className="absolute hidden md:block">
+                    <Popover.Panel className="absolute right-0 top-0 hidden h-28 w-48 md:block">
                       <Image
                         className="mt-4 rounded-lg shadow-sm"
                         src="https://picsum.photos/300/150"
@@ -233,6 +239,14 @@ export default function Game({ game, servers, payments }: GamePageProps) {
                   </Transition>
                 </Popover>
               </div>
+              <p className="mt-2 px-6 pb-6 text-sm italic">
+                Untuk mengetahui User ID Anda, Silakan Klik menu profile
+                dibagian kiri atas pada menu utama game. Dan user ID akan
+                terlihat dibagian bawah Nama Karakter Game Anda. Silakan
+                masukkan User ID dan Zone ID Anda untuk menyelesaikan transaksi.
+                Contoh : 12345678(1234). Masukkan 12345678 di User ID dan 1234
+                di Zone ID
+              </p>
             </SectionTopupStep>
 
             <div className="divider" />
@@ -263,7 +277,7 @@ export default function Game({ game, servers, payments }: GamePageProps) {
                   </div>
                   <div className="collapse-content">
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                      {payments.map((payment, i) => (
+                      {payments.map((payment) => (
                         <CardPayment
                           key={`payment-${payment.id}`}
                           id={payment.id}
@@ -317,15 +331,17 @@ export default function Game({ game, servers, payments }: GamePageProps) {
         title="Konfirmasi Pesanan"
         footer={<button className="btn-primary btn">Bayar</button>}
       >
-        <table>
-          <tr>
-            <td>Metode Pembayaran:</td>
-            <td>{selectedPayment?.name}</td>
-          </tr>
-          <tr>
-            <td>Total Transaksi:</td>
-            <td>{selectedNominal?.harga}</td>
-          </tr>
+        <table className="table w-full table-auto">
+          <tbody>
+            <tr>
+              <td>Metode Pembayaran:</td>
+              <td>{selectedPayment?.name}</td>
+            </tr>
+            <tr>
+              <td>Total Transaksi:</td>
+              <td>{selectedNominal?.harga}</td>
+            </tr>
+          </tbody>
         </table>
       </ModalDialog>
     </>

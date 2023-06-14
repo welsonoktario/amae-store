@@ -26,7 +26,6 @@ const games = [
 
 export default function SectionTopUp() {
   const { width } = useWindowSize();
-  console.log(chunk(games, 1));
 
   return (
     <section className="mt-8">
