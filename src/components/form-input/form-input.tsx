@@ -8,7 +8,7 @@ interface FormInputProps
     HTMLInputElement
   > {
   label: string;
-  onInputChange: (value: string) => void;
+  onInputChange?: (value: string) => void;
 }
 
 const FormInput = (props: FormInputProps) => {
@@ -23,7 +23,11 @@ const FormInput = (props: FormInputProps) => {
         name={props.name}
         type={props.type}
         value={props.value}
-        onChange={(e) => props.onInputChange(e.target.value)}
+        onChange={(e) => {
+          return props.onInputChange
+            ? props.onInputChange?.(e.target.value)
+            : null;
+        }}
         placeholder={props.placeholder}
         className={clsx(styles['input-text'])}
         required={props.required}
