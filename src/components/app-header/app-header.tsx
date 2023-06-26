@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 
 import UserIcon from '@/assets/icons/user.svg';
 import logo from '@/assets/logo.png';
+import { useAuth } from 'reactfire';
 
 /*
   TODO:
@@ -16,6 +17,7 @@ import logo from '@/assets/logo.png';
   2. Refactor component jadi component independen (nav user dan menu)
 */
 export default function AppNav() {
+  const auth = useAuth();
   const MenuProfile = dynamic(
     () => import('@components/menu-profile/menu-profile'),
     { ssr: false },
@@ -71,8 +73,7 @@ export default function AppNav() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Popover.Panel className="absolute right-0 mt-2 min-w-[35vw] rounded-xl bg-primary-2 shadow-lg lg:min-w-[25vw]">
-                      <MenuProfile />
-                      {/* <MenuAuth /> */}
+                      {auth.currentUser ? <MenuProfile /> : <MenuAuth />}
                     </Popover.Panel>
                   </Transition>
                 </>

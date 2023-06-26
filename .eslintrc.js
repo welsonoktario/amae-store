@@ -3,7 +3,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@next/next/recommended',
     'next/core-web-vitals',
-    'prettier',
+    // 'prettier',
   ],
   plugins: ['simple-import-sort'],
   rules: {

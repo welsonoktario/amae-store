@@ -11,5 +11,5 @@
 }
 
 .input-text {
-  @apply input-bordered input w-full;
+  @apply input-bordered input-primary input w-full;
 }

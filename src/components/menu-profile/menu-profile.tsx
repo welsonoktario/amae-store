@@ -1,15 +1,26 @@
 import { formatRupiah } from '@/lib/utils';
+import Image from 'next/image';
+import { useAuth } from 'reactfire';
 
 export default function MenuProfile() {
+  const auth = useAuth();
   const balance = formatRupiah(20000);
 
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between whitespace-nowrap p-4">
         <div className="inline-flex flex-row items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-zinc-200"></div>
+          <div className="relative h-12 w-12 rounded-full bg-zinc-200">
+            {auth.currentUser?.photoURL && (
+              <Image
+                src={auth.currentUser.photoURL}
+                alt={auth.currentUser?.displayName!}
+                fill
+              />
+            )}
+          </div>
           <div className="flex flex-col">
-            <p>Bernardus Boli</p>
+            <p>{auth.currentUser?.displayName}</p>
             <div className="font-bold">Member Gold</div>
           </div>
         </div>
@@ -60,7 +71,7 @@ export default function MenuProfile() {
                 strokeWidth="2"
               ></path>
             </svg>
-            <p className="text-sm">email@example.com</p>
+            <p className="text-sm">{auth.currentUser?.email}</p>
           </div>
 
           <div className="col-span-full inline-flex flex-row gap-2 justify-self-start lg:col-auto lg:justify-self-end">
@@ -88,7 +99,7 @@ export default function MenuProfile() {
                 strokeWidth="2"
               ></path>
             </svg>
-            <p className="text-sm">081234567890</p>
+            <p className="text-sm">{auth.currentUser?.phoneNumber}</p>
           </div>
           <hr className="col-span-full my-3 divide-y " />
           <p className="col-span-full font-semibold">Saldo Amae Wallet</p>

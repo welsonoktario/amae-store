@@ -23,7 +23,7 @@
 }
 
 .auth-btn {
-  @apply btn-primary btn-block btn mt-6;
+  @apply btn-primary btn-block btn mt-6 text-white;
 }
 
 .register-wrapper {

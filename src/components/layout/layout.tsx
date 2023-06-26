@@ -3,8 +3,9 @@ import AppHeader from '@components/app-header/app-header';
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 import styles from './layout.module.css';
-import { FirestoreProvider, useFirebaseApp } from 'reactfire';
+import { AuthProvider, FirestoreProvider, useFirebaseApp } from 'reactfire';
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 interface LayoutProps {
   children: ReactNode;
@@ -26,18 +27,21 @@ const satoshi = localFont({
 
 export default function Layout({ children }: LayoutProps) {
   const firestore = getFirestore(useFirebaseApp());
+  const auth = getAuth(useFirebaseApp());
 
   return (
-    <FirestoreProvider sdk={firestore}>
-      <div
-        className={`${satoshi.variable} font-sans ${styles['layout-wrapper']}`}
-      >
-        <AppHeader />
-        <main className={styles['main-wrapper']}>
-          <div className={styles['content-wrapper']}>{children}</div>
-        </main>
-        <AppFooter />
-      </div>
-    </FirestoreProvider>
+    <AuthProvider sdk={auth}>
+      <FirestoreProvider sdk={firestore}>
+        <div
+          className={`${satoshi.variable} font-sans ${styles['layout-wrapper']}`}
+        >
+          <AppHeader />
+          <main className={styles['main-wrapper']}>
+            <div className={styles['content-wrapper']}>{children}</div>
+          </main>
+          <AppFooter />
+        </div>
+      </FirestoreProvider>
+    </AuthProvider>
   );
 }
