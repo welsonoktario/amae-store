@@ -1,11 +1,12 @@
-import AppFooter from '@components/app-footer/app-footer';
-import AppHeader from '@components/app-header/app-header';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
-import styles from './layout.module.css';
 import { AuthProvider, FirestoreProvider, useFirebaseApp } from 'reactfire';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+
+import AppFooter from '@components/app-footer/app-footer';
+import AppHeader from '@components/app-header/app-header';
+import styles from './layout.module.css';
 
 interface LayoutProps {
   children: ReactNode;

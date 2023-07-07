@@ -27,7 +27,13 @@ const withTransition = (Component: NextComponentType) => {
       };
     }, [router.events]);
 
-    const Loading = () => <div className="container mx-auto">Loading...</div>;
+    const Loading = () => (
+      <div className="container mx-auto h-full">
+        <div className="flex h-full w-full items-center justify-center">
+          <span className="loading loading-spinner text-primary"></span>
+        </div>
+      </div>
+    );
 
     return (
       <div className={transition}>

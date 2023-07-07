@@ -1,7 +1,10 @@
 import Xendit from 'xendit-node';
 
-const { Invoice } = new Xendit({
+const { Invoice, VirtualAcc, EWallet, QrCode } = new Xendit({
   secretKey: process.env.XENDIT_SECRET!,
 });
 
-export const i = new Invoice({});
+export const invoice = new Invoice({});
+export const virtualAcc = new VirtualAcc({});
+export const eWallet = new EWallet({});
+export const qr = new QrCode({});

@@ -17,7 +17,7 @@ interface CarouselDotsProps {
 const CarouselDots = ({ itemsLength, selectedIndex }: CarouselDotsProps) => {
   const arr = new Array(itemsLength).fill(0);
   return (
-    <div className="flex -translate-y-5 justify-center gap-1">
+    <div className="flex -translate-y-5 justify-center space-x-1 space-y-1">
       {arr.map((_, index) => {
         const selected = index === selectedIndex;
         return (

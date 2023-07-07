@@ -3,11 +3,11 @@
 }
 
 .nav {
-  @apply container mx-auto flex flex-col px-4 py-4 md:flex-row lg:px-8 lg:py-4;
+  @apply container mx-auto flex flex-col px-4 pb-4 md:flex-row lg:px-8 lg:pb-0;
 }
 
 .nav-wrapper {
-  @apply grid w-full grid-flow-col items-center justify-between justify-items-center gap-4 lg:gap-8;
+  @apply grid w-full grid-flow-col items-center justify-between justify-items-center space-x-4 lg:space-x-8;
 }
 
 .nav-wrapper-sm {

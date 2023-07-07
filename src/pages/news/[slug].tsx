@@ -44,7 +44,7 @@ export default function NewsDetail({ article }: { article: ArticleType }) {
             />
           </figure>
           <div className="card-body">
-            <div className="inline-flex w-fit justify-start space-x-2">
+            <div className="flex w-fit justify-start gap-x-2">
               <p>12 April, 2023</p>
               <p>·</p>
               <Link href="/news?category=2" className="link-primary link">

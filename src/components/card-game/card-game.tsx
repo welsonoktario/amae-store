@@ -1,22 +1,21 @@
-import slugify from '@/lib/utils/slugify';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './card-game.module.css';
 import clsx from 'clsx';
 
 export interface CardGameProps {
-  thumbnail: string;
+  slug?: string;
   title: string;
+  thumbnail: string;
   className?: string;
 }
 
 export default function CardGame({
-  thumbnail,
+  slug,
   title,
+  thumbnail,
   className,
 }: CardGameProps) {
-  const slug = slugify(title);
-
   return (
     <Link
       href={`game/${slug}`}

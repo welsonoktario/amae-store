@@ -7,7 +7,8 @@
 }
 
 .carousel-item {
-  @apply relative mx-2 h-40 md:h-72 lg:h-96;
+  @apply relative mx-2;
+  aspect-ratio: 2.431 / 1;
   flex: 0 0 85%;
 }
 

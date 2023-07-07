@@ -11,7 +11,24 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'play-lh.googleusercontent.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.xendit.co',
+      },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/pay/:bank',
+        destination: 'https://api.xendit.co/callback_virtual_accounts',
+        permanent: false,
+      },
+    ];
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports

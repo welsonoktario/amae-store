@@ -1,9 +1,11 @@
-import withTransition from '@/components/with-transition';
-import Layout from '@components/layout/layout';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import '@styles/global.css';
 import { FirebaseAppProvider } from 'reactfire';
+
+import Transition from '@/components/transition/transition';
+import Layout from '@components/layout/layout';
+import '@styles/global.css';
+import '@styles/transition.css';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY || '',
@@ -16,8 +18,6 @@ const firebaseConfig = {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
-  const Screen = withTransition(Component);
-
   return (
     <>
       <Head>
@@ -28,7 +28,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>
         <Layout>
-          <Screen {...pageProps} />
+          <Transition>
+            <Component {...pageProps} />
+          </Transition>
         </Layout>
       </FirebaseAppProvider>
     </>
