@@ -4,12 +4,15 @@ import { useAuth, useUser } from 'reactfire';
 import { Edit, Mail, Phone, Wallet } from 'lucide-react';
 import { useStore } from '@/lib/store';
 
-export default function MenuProfile() {
+export default function MenuProfile({ close }: { close: () => void }) {
   const auth = useAuth();
   const [authUser] = useStore((state) => [state.authUser]);
   const { status: userStatus, data: user } = useUser();
 
-  const logout = async () => await auth.signOut();
+  const logout = async () => {
+    close();
+    await auth.signOut();
+  };
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -34,39 +37,40 @@ export default function MenuProfile() {
           </div>
 
           <div className="w-full rounded-xl bg-white p-4">
-            <div className="grid grid-cols-2 space-x-2 space-y-2">
-              <div className="col-span-full flex flex-row space-x-2 space-y-2 lg:col-auto">
+            <div className="flex md:flex-col md:space-x-8 lg:flex-row lg:justify-between">
+              <div className="flex flex-row space-x-2 lg:col-auto">
                 <Mail className="aspect-square" size={20} />
                 <p className="text-sm">{user?.email}</p>
               </div>
 
-              <div className="col-span-full flex flex-row space-x-2 space-y-2 justify-self-start lg:col-auto lg:justify-self-end">
-                <Phone className="aspect-square" size={20} />
+              <div className="flex flex-row space-x-2 justify-self-start lg:col-auto lg:justify-self-end">
+                <Phone className="aspect-square" size={18} />
                 <p className="text-sm">{authUser.hp}</p>
               </div>
-              <hr className="col-span-full my-3 divide-y " />
-              <p className="col-span-full font-semibold">Saldo Amae Wallet</p>
-              <div className="col-span-full flex w-full flex-row items-center justify-between">
-                <div className="flex flex-row space-x-2 space-y-2">
-                  <Wallet className="aspect-square" size={20} />
-                  <p className="text-sm font-bold">
-                    {formatRupiah(authUser.saldo)}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  className="btn-sm btn border-0 bg-primary-3 capitalize"
-                >
-                  Isi Saldo
-                </button>
-              </div>
             </div>
-            <button
-              onClick={logout}
-              className="btn-ghost btn-sm btn mx-auto mt-2 text-error hover:bg-error hover:bg-opacity-20"
-            >
-              Logout
-            </button>
+            <hr className="my-3 w-full divide-y " />
+            <p className="font-semibold">Saldo Amae Wallet</p>
+            <div className="mt-2 flex w-full flex-row items-center justify-between">
+              <div className="flex flex-row space-x-2">
+                <Wallet className="aspect-square" size={20} />
+                <p className="text-sm">{formatRupiah(authUser.saldo)}</p>
+              </div>
+              <button
+                type="button"
+                className="btn-sm btn border-0 bg-primary-3 capitalize"
+                onClick={close}
+              >
+                Isi Saldo
+              </button>
+            </div>
+            <div className="mt-4 flex w-full justify-center">
+              <button
+                onClick={logout}
+                className="btn-ghost btn-sm btn text-error hover:bg-error hover:bg-opacity-20"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </>
       )}

@@ -13,24 +13,32 @@ export interface AuthUser {
 
 export interface StoreState {
   authUser?: AuthUser;
-  setAuthUser: (user: AuthUser) => void;
   selectedPaymentMethod?: 'va' | 'ewallet' | 'qr';
-  setSelectedPaymentMethod: (paymentMethod: 'va' | 'ewallet' | 'qr') => void;
   selectedNominal?: CardNominalProps;
-  setSelectedNominal: (nominal: CardNominalProps) => void;
   selectedPayment?: CardPaymentProps;
-  setSelectedPayment: (payment: CardPaymentProps) => void;
 }
 
-export const useStore = create<StoreState>((set) => ({
-  authUser: undefined,
-  paymentMethod: undefined,
-  setSelectedPaymentMethod: (paymentMethod: 'va' | 'ewallet' | 'qr') =>
-    set(() => ({ selectedPaymentMethod: paymentMethod })),
-  setAuthUser: (user: AuthUser) => set(() => ({ authUser: user })),
+export interface StoreActions {
+  setAuthUser: (user: AuthUser) => void;
+  setSelectedPaymentMethod: (paymentMethod?: 'va' | 'ewallet' | 'qr') => void;
+  setSelectedNominal: (nominal?: CardNominalProps) => void;
+  setSelectedPayment: (payment?: CardPaymentProps) => void;
+  reset: () => void;
+}
+
+const initialState: StoreState = {
+  selectedPaymentMethod: undefined,
   selectedNominal: undefined,
-  setSelectedNominal: (nominal: CardNominalProps) =>
-    set(() => ({ selectedNominal: nominal })),
   selectedPayment: undefined,
-  setSelectedPayment: (payment) => set(() => ({ selectedPayment: payment })),
+};
+
+export const useStore = create<StoreState & StoreActions>((set) => ({
+  authUser: undefined,
+  ...initialState,
+  setSelectedPaymentMethod: (paymentMethod?) =>
+    set(() => ({ selectedPaymentMethod: paymentMethod })),
+  setAuthUser: (user?: AuthUser) => set(() => ({ authUser: user })),
+  setSelectedNominal: (nominal?) => set(() => ({ selectedNominal: nominal })),
+  setSelectedPayment: (payment?) => set(() => ({ selectedPayment: payment })),
+  reset: () => set(initialState),
 }));

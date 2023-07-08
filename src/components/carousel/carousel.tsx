@@ -4,6 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import styles from './carousel.module.css';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface CarouseItemProps {
   images: string[];
@@ -17,7 +18,7 @@ interface CarouselDotsProps {
 const CarouselDots = ({ itemsLength, selectedIndex }: CarouselDotsProps) => {
   const arr = new Array(itemsLength).fill(0);
   return (
-    <div className="flex -translate-y-5 justify-center space-x-1 space-y-1">
+    <div className="flex -translate-y-5 justify-center space-x-1">
       {arr.map((_, index) => {
         const selected = index === selectedIndex;
         return (
@@ -37,7 +38,9 @@ const CarouselDots = ({ itemsLength, selectedIndex }: CarouselDotsProps) => {
 };
 
 export default function Carousel({ images }: CarouseItemProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 10000 }),
+  ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
@@ -77,48 +80,24 @@ export default function Carousel({ images }: CarouseItemProps) {
       <CarouselDots itemsLength={images.length} selectedIndex={selectedIndex} />
 
       <button
-        className={`embla__prev ${styles['carousel-prev']}`}
+        className={clsx(
+          'embla__prev',
+          styles['carousel-nav'],
+          styles['carousel-prev'],
+        )}
         onClick={scrollPrev}
       >
-        <svg
-          width="31px"
-          height="31px"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          color="#5ebf39"
-        >
-          <path
-            d="M15 6l-6 6 6 6"
-            stroke="#5ebf39"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-        </svg>
+        <ChevronLeft className="h-6 w-6 text-white md:h-8 md:w-8" />
       </button>
       <button
-        className={`embla__next ${styles['carousel-next']}`}
+        className={clsx(
+          'embla__next',
+          styles['carousel-nav'],
+          styles['carousel-next'],
+        )}
         onClick={scrollNext}
       >
-        <svg
-          width="31px"
-          height="31px"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          color="#5ebf39"
-        >
-          <path
-            d="M9 6l6 6-6 6"
-            stroke="#5ebf39"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-        </svg>
+        <ChevronRight className="h-6 w-6 text-white md:h-8 md:w-8" />
       </button>
     </div>
   );

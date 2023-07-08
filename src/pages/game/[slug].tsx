@@ -132,17 +132,23 @@ export default function Game() {
   const [open, setOpen] = useState<boolean>(false);
   const [qrId, setQrId] = useState('');
   const [qrCode, setQrCode] = useState('');
-  const [paymentStatus, setPaymentStatus] = useState<'pending' | 'success'>(
-    'pending',
-  );
+  const [paymentStatus, setPaymentStatus] = useState<
+    'pending' | 'success' | 'loading'
+  >('pending');
 
-  const [authUser, selectedPaymentMethod, selectedNominal, selectedPayment] =
-    useStore((state) => [
-      state.authUser,
-      state.selectedPaymentMethod,
-      state.selectedNominal,
-      state.selectedPayment,
-    ]);
+  const [
+    authUser,
+    selectedPaymentMethod,
+    selectedNominal,
+    selectedPayment,
+    resetTopUp,
+  ] = useStore((state) => [
+    state.authUser,
+    state.selectedPaymentMethod,
+    state.selectedNominal,
+    state.selectedPayment,
+    state.reset,
+  ]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -193,6 +199,8 @@ export default function Game() {
     };
 
     loadData();
+
+    return () => resetTopUp();
   }, []);
 
   const links: BreadcrumbLink[] = [
@@ -261,6 +269,7 @@ export default function Game() {
   };
 
   const checkPayment = async () => {
+    setPaymentStatus('loading');
     if (qrId) {
       const res = await fetch(`/api/payment/${qrId}`, {
         method: 'GET',
@@ -273,6 +282,7 @@ export default function Game() {
       const { status, data } = await res.json();
 
       if (data.data.length > 0) {
+        resetTopUp();
         setPaymentStatus('success');
       } else {
         setPaymentStatus('pending');
@@ -284,7 +294,7 @@ export default function Game() {
     const qrCollectionRef = collection(fireStore, 'QR');
     const doc = await addDoc(qrCollectionRef, {
       id: qrCode,
-      userId: auth.currentUser?.uid,
+      userId: auth.currentUser?.uid || 'Publik',
     });
 
     return doc;
@@ -508,10 +518,16 @@ export default function Game() {
       <ModalDialog
         open={open}
         onClose={() => setOpen(false)}
-        title={paymentStatus === 'pending' ? 'Konfirmasi Pesanan' : ''}
+        title={paymentStatus !== 'success' ? 'Konfirmasi Pesanan' : undefined}
         footer={
-          paymentStatus === 'pending' ? (
-            qrId ? (
+          paymentStatus === 'loading' ? (
+            <button className="btn-primary btn-disabled btn">
+              <span className="loading loading-spinner"></span>
+              Loading
+            </button>
+          ) : (
+            paymentStatus === 'pending' &&
+            (qrId ? (
               <button
                 className="btn-primary btn"
                 onClick={() => checkPayment()}
@@ -522,15 +538,19 @@ export default function Game() {
               <button className="btn-primary btn" onClick={() => pay()}>
                 Bayar
               </button>
-            )
-          ) : (
-            <button className="btn-primary btn" onClick={() => setOpen(false)}>
-              Tutup
-            </button>
+            ))
           )
         }
       >
-        {paymentStatus === 'pending' && (
+        {paymentStatus === 'success' && (
+          <div className="w-full">
+            <BadgeCheck className="mx-auto text-primary" size={108} />
+            <h6 className="my-8 text-center text-xl font-bold">
+              Pembayaran Berhasil
+            </h6>
+          </div>
+        )}
+        {paymentStatus !== 'success' && (
           <>
             <div className="w-full p-4">
               {qrCode && (
@@ -570,14 +590,6 @@ export default function Game() {
               </tbody>
             </table>
           </>
-        )}
-        {paymentStatus === 'success' && (
-          <div className="w-full">
-            <BadgeCheck className="mx-auto text-primary" size={108} />
-            <h6 className="my-8 text-center text-xl font-bold">
-              Pembayaran Berhasil
-            </h6>
-          </div>
         )}
       </ModalDialog>
     </>

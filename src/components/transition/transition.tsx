@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 const variants = {
   out: {
     opacity: 0,
+    height: '100%',
     y: 40,
     transition: {
       duration: 0.5,
@@ -12,6 +13,7 @@ const variants = {
   },
   in: {
     opacity: 1,
+    height: '100%',
     y: 0,
     transition: {
       duration: 0.5,

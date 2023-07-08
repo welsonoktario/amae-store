@@ -6,12 +6,7 @@ const Carousel = dynamic(() => import('@/components/carousel/carousel'), {
   ssr: false,
 });
 
-const images = [
-  'https://picsum.photos/1000/300',
-  'https://picsum.photos/1000/300',
-  'https://picsum.photos/1000/300',
-  'https://picsum.photos/1000/300',
-];
+const images = ['/web-1.jpg', '/web-2.jpg'];
 
 export default function Home() {
   return (

@@ -13,7 +13,7 @@ export default function SectionTopUp() {
 
   return (
     <section className="mt-8">
-      <p className="mb-4 block font-bold uppercase underline decoration-primary underline-offset-4">
+      <p className="mb-4 block text-center font-bold uppercase underline decoration-primary underline-offset-4">
         Top Up Game
       </p>
 

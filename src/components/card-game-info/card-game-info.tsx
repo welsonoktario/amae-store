@@ -11,7 +11,7 @@ export default function CardGameInfo(props: CardGameInfoProps) {
       <div className="card-body grid grid-cols-3 lg:flex lg:grid-cols-1">
         <div className="col-span-1 lg:col-span-full">
           <div className="relative mx-auto aspect-square w-full overflow-hidden rounded-lg md:w-1/2 lg:w-2/3">
-            <Image src={props.thumbnail} alt={props.title} fill />
+            <Image src={props.thumbnail} alt={props.title} fill priority />
           </div>
           <p className="text-center font-semibold">{props.title}</p>
         </div>

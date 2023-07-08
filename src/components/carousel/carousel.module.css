@@ -8,7 +8,7 @@
 
 .carousel-item {
   @apply relative mx-2;
-  aspect-ratio: 2.431 / 1;
+  aspect-ratio: 2.4 / 1;
   flex: 0 0 85%;
 }
 
@@ -16,10 +16,14 @@
   @apply rounded-lg object-fill;
 }
 
-.carousel-prev {
-  @apply absolute inset-y-0 left-4 z-50 text-white;
+.carousel-nav {
+  @apply btn-primary btn-circle btn absolute inset-y-0 z-50 my-auto scale-75 shadow-md md:scale-100;
 }
 
-.carousel-next {
-  @apply absolute inset-y-0 right-4 z-50 text-white;
+.carousel-nav.carousel-prev {
+  @apply left-0.5 lg:left-8;
+}
+
+.carousel-nav.carousel-next {
+  @apply right-0.5 lg:right-8;
 }

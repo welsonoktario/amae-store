@@ -8,14 +8,14 @@ export default function AppFooter() {
     <footer className={styles.footer}>
       <div className={styles['footer-wrapper']}>
         <div>
-          <Link href="/" className="relative h-14 w-14 md:h-20 md:w-20">
+          <Link href="/" as="/" className="relative h-14 w-14 md:h-20 md:w-20">
             <Image
               className="-ml-4 object-contain"
               src={logo}
               alt="Amae Group"
+              sizes="10vw"
               fill
               priority
-              sizes="10vw"
             />
           </Link>
           <p>Amae Group</p>

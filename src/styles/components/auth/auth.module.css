@@ -1,9 +1,9 @@
 .auth-wrapper {
-  @apply lg:mt-8;
+  @apply my-2 flex h-full items-center justify-center;
 }
 
 .auth-form {
-  @apply card m-auto w-full bg-white shadow-xl md:w-1/2 lg:w-1/3;
+  @apply card m-auto w-full bg-white shadow-md md:w-[32rem];
 }
 
 .auth-form-content {
@@ -24,6 +24,10 @@
 
 .auth-btn {
   @apply btn-primary btn-block btn mt-6 text-white;
+}
+
+.auth-btn-loading {
+  @apply btn-primary btn-disabled btn-block btn mt-6;
 }
 
 .register-wrapper {

@@ -14,10 +14,10 @@ export interface CardPaymentProps {
 }
 
 const CardPayment = (props: CardPaymentProps) => {
-  const cardWrapper = clsx([
+  const cardWrapper = clsx(
     'inline-flex w-full justify-between rounded-lg items-center p-6 my-auto cursor-pointer transition-all duration-250',
     props.checked ? 'bg-primary-3 text-white' : 'bg-white',
-  ]);
+  );
   const [setSelectedPayment, setSelectedPaymentMethod] = useStore((state) => [
     state.setSelectedPayment,
     state.setSelectedPaymentMethod,
@@ -31,7 +31,15 @@ const CardPayment = (props: CardPaymentProps) => {
         setSelectedPaymentMethod(props.paymentMethod);
       }}
     >
-      <Image src={props.img} alt={props.name} height={64} width={64} />
+      <div className="relative">
+        <Image
+          src={props.img}
+          alt={props.name}
+          className="h-full w-auto"
+          height={64}
+          width={64}
+        />
+      </div>
       <div>
         <p className="block">{props.name}</p>
         <p className="block text-sm font-bold md:text-lg">

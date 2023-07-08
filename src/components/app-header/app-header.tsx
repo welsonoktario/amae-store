@@ -32,7 +32,7 @@ export default function AppNav() {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles['nav-wrapper']}>
-          <Link href="/" className={styles['nav-logo']}>
+          <Link href="/" as="/" className={styles['nav-logo']}>
             <Image
               className={styles['nav-logo-img']}
               src={logo}
@@ -58,7 +58,7 @@ export default function AppNav() {
               as="div"
               className="relative z-50 inline-block justify-self-end text-left"
             >
-              {() => (
+              {({ close }) => (
                 <>
                   <Popover.Button className={styles['nav-button']}>
                     <User size={24} />
@@ -73,12 +73,12 @@ export default function AppNav() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Popover.Panel className="absolute right-0 mt-2 min-w-[35vw] rounded-xl bg-primary-2 shadow-lg lg:min-w-[25vw]">
+                    <Popover.Panel className="absolute right-0 mt-2 min-w-[35vw] overflow-hidden rounded-xl bg-primary-2 shadow-lg lg:min-w-[25vw]">
                       {status === 'loading' && <p>Loading...</p>}
                       {status === 'success' && auth.signedIn ? (
-                        <MenuProfile />
+                        <MenuProfile close={() => close()} />
                       ) : (
-                        <MenuAuth />
+                        <MenuAuth close={() => close()} />
                       )}
                     </Popover.Panel>
                   </Transition>

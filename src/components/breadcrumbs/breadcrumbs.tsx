@@ -21,7 +21,9 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
             </li>
           ) : (
             <li className="text-zinc-600" key={link.href}>
-              <Link href={link.href}>{link.label}</Link>
+              <Link href={link.href} as={link.href}>
+                {link.label}
+              </Link>
             </li>
           ),
         )}

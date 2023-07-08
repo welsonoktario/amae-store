@@ -1,6 +1,8 @@
 import FormCheckbox from '@/components/form-checkbox/form-checkbox';
 import FormInput from '@/components/form-input/form-input';
+import { ModalDialog } from '@/components/modal-dialog/modal-dialog';
 import styles from '@styles/components/auth/auth.module.css';
+import clsx from 'clsx';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -8,12 +10,21 @@ import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import { useSigninCheck } from 'reactfire';
 
+const authErrors = {
+  'auth/user-not-found': 'Akun tidak ditemukan',
+  'auth/wrong-password': 'Email atau password salah',
+};
+
 const Login = () => {
+  const router = useRouter();
   const auth = getAuth();
   const { status, data } = useSigninCheck();
-  const router = useRouter();
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     if (status === 'success' && data.signedIn) {
@@ -22,13 +33,23 @@ const Login = () => {
   }, [status]);
 
   const handleLoginForm = async (e: FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
 
-    const res = await signInWithEmailAndPassword(auth, email, password);
+    try {
+      const res = await signInWithEmailAndPassword(auth, email, password);
 
-    if (res.user) {
-      router.back();
+      if (res.user) {
+        router.back();
+      }
+    } catch (err: any) {
+      if (err.code) {
+        setPassword('');
+        setErrorMsg((authErrors as any)[err.code]);
+        setDialogOpen(true);
+      }
     }
+    setLoading(false);
   };
 
   return (
@@ -79,8 +100,19 @@ const Login = () => {
                     Lupa password?
                   </Link>
                 </div>
-                <button type="submit" className={styles['auth-btn']}>
-                  Masuk
+                <button
+                  type="submit"
+                  className={clsx(
+                    loading ? styles['auth-btn-loading'] : styles['auth-btn'],
+                  )}
+                >
+                  {loading ? (
+                    <>
+                      <span className="loading loading-spinner"></span>Loading
+                    </>
+                  ) : (
+                    'Masuk'
+                  )}
                 </button>
 
                 <p className={styles['register-wrapper']}>
@@ -94,6 +126,21 @@ const Login = () => {
           </div>
         </form>
       </div>
+
+      <ModalDialog
+        open={dialogOpen}
+        title="Login Gagal"
+        footer={
+          <button
+            className="btn-primary btn"
+            onClick={() => setDialogOpen(false)}
+          >
+            Tutup
+          </button>
+        }
+      >
+        <p>{errorMsg && errorMsg}</p>
+      </ModalDialog>
     </>
   );
 };
