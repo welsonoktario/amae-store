@@ -1,5 +1,4 @@
 import styles from './app-footer.module.css';
-import logo from '@/assets/logo.png';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -11,7 +10,7 @@ export default function AppFooter() {
           <Link href="/" as="/" className="relative h-14 w-14 md:h-20 md:w-20">
             <Image
               className="-ml-4 object-contain"
-              src={logo}
+              src="/logo.png"
               alt="Amae Group"
               sizes="10vw"
               fill

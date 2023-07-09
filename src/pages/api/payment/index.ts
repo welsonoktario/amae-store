@@ -24,8 +24,18 @@ export default async function handler(
     });
   }
 
-  const { paymentType, code, name, externalID, amount, payerEmail, customer } =
-    req.body;
+  const {
+    paymentType,
+    code,
+    name,
+    externalID,
+    amount,
+    payerEmail,
+    customer,
+    item,
+    userId,
+    server,
+  } = req.body;
 
   try {
     let resp;
@@ -65,6 +75,11 @@ export default async function handler(
           callbackURL: process.env.XENDIT_SUCCESS_REDIRECT_URL!,
           currency: 'IDR',
           amount,
+          basket: [item],
+          metadata: {
+            userId,
+            server,
+          },
         }),
       });
       resp = await res.json();

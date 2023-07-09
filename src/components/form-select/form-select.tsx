@@ -1,7 +1,6 @@
 import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, ChevronDownIcon } from 'lucide-react';
 import { Fragment, useState } from 'react';
-import ArrowDownIcon from '@/assets/icons/arrow-down.svg';
-import CheckIcon from '@/assets/icons/check.svg';
 import styles from './form-select.module.css';
 
 export interface FormSelectOption {
@@ -31,7 +30,7 @@ const FormSelect = (props: FormSelectProps) => {
         <Listbox.Button className="relative my-auto h-full w-full px-4 text-left text-primary">
           <span>{selectedOption?.label}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            <ArrowDownIcon className="h-6 w-6 stroke-2" />
+            <ChevronDownIcon className="h-6 w-6 stroke-2" />
           </span>
         </Listbox.Button>
         <Transition

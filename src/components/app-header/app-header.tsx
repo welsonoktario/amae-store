@@ -1,22 +1,14 @@
-import Link from 'next/link';
-import styles from './app-header.module.css';
-
 import { Menu, Popover, Transition } from '@headlessui/react';
+import clsx from 'clsx';
+import { MenuIcon, UserIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Fragment } from 'react';
-
-import logo from '@/assets/logo.png';
 import { useSigninCheck } from 'reactfire';
-import clsx from 'clsx';
-import { User, Menu as MenuIcon } from 'lucide-react';
 
-/*
-  TODO:
+import styles from './app-header.module.css';
 
-  1. Migrate inline className ke CSS module.
-  2. Refactor component jadi component independen (nav user dan menu)
-*/
 export default function AppNav() {
   const { status, data: auth } = useSigninCheck();
   const MenuProfile = dynamic(
@@ -35,11 +27,11 @@ export default function AppNav() {
           <Link href="/" as="/" className={styles['nav-logo']}>
             <Image
               className={styles['nav-logo-img']}
-              src={logo}
+              src="/logo.png"
               alt="Amae Group"
+              sizes="10vw"
               fill
               priority
-              sizes="10vw"
             />
           </Link>
 
@@ -61,7 +53,7 @@ export default function AppNav() {
               {({ close }) => (
                 <>
                   <Popover.Button className={styles['nav-button']}>
-                    <User size={24} />
+                    <UserIcon size={24} />
                   </Popover.Button>
 
                   <Transition

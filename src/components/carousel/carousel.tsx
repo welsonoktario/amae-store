@@ -4,7 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import styles from './carousel.module.css';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 interface CarouseItemProps {
   images: string[];
@@ -87,7 +87,7 @@ export default function Carousel({ images }: CarouseItemProps) {
         )}
         onClick={scrollPrev}
       >
-        <ChevronLeft className="h-6 w-6 text-white md:h-8 md:w-8" />
+        <ChevronLeftIcon className="h-6 w-6 text-white md:h-8 md:w-8" />
       </button>
       <button
         className={clsx(
@@ -97,7 +97,7 @@ export default function Carousel({ images }: CarouseItemProps) {
         )}
         onClick={scrollNext}
       >
-        <ChevronRight className="h-6 w-6 text-white md:h-8 md:w-8" />
+        <ChevronRightIcon className="h-6 w-6 text-white md:h-8 md:w-8" />
       </button>
     </div>
   );

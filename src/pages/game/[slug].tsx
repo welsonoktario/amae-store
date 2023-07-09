@@ -1,5 +1,17 @@
 import { Popover, Transition } from '@headlessui/react';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import {
+  DocumentData,
+  DocumentReference,
+  Timestamp,
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from 'firebase/firestore';
 import { BadgeCheck, HelpCircleIcon } from 'lucide-react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -132,6 +144,8 @@ export default function Game() {
   const [open, setOpen] = useState<boolean>(false);
   const [qrId, setQrId] = useState('');
   const [qrCode, setQrCode] = useState('');
+  const [transactionDoc, setTransactionDoc] =
+    useState<DocumentReference<DocumentData>>();
   const [paymentStatus, setPaymentStatus] = useState<
     'pending' | 'success' | 'loading'
   >('pending');
@@ -251,10 +265,17 @@ export default function Game() {
       body: JSON.stringify({
         externalID: new Date().getTime().toString(),
         amount: selectedNominal?.harga,
-        payerEmail: authUser?.email,
         paymentType: selectedPaymentMethod,
         code: selectedPayment?.code || '',
-        name: authUser?.nama,
+        item: {
+          name: selectedNominal?.label,
+          price: selectedNominal?.harga,
+          description: selectedNominal?.description,
+          quantity: 1,
+          currency: 'IDR',
+        },
+        userId,
+        server,
       }),
     });
 
@@ -262,7 +283,7 @@ export default function Game() {
     console.log(data);
 
     if (status === 'ok') {
-      await addTransaction(data.id);
+      setTransactionDoc(await addTransaction(data.id));
       setQrCode(data.qr_string);
       setQrId(data.id);
     }
@@ -281,11 +302,23 @@ export default function Game() {
 
       const { status, data } = await res.json();
 
-      if (data.data.length > 0) {
-        resetTopUp();
-        setPaymentStatus('success');
-      } else {
-        setPaymentStatus('pending');
+      if (status === 'ok') {
+        const payments = data.data;
+        if (payments.length > 0) {
+          const paymentData = payments[0];
+          setPaymentStatus('success');
+
+          if (transactionDoc) {
+            updateTransaction(
+              transactionDoc.id,
+              paymentData.id,
+              paymentData.created,
+            );
+          }
+          resetTopUp();
+        } else {
+          setPaymentStatus('pending');
+        }
       }
     }
   };
@@ -295,6 +328,27 @@ export default function Game() {
     const doc = await addDoc(qrCollectionRef, {
       id: qrCode,
       userId: auth.currentUser?.uid || 'Publik',
+      status: 'PENDING',
+      createdAt: serverTimestamp(),
+    });
+
+    return doc;
+  };
+
+  const updateTransaction = async (
+    docId: string,
+    paymentId: string,
+    paymentDate: string,
+  ) => {
+    if (!docId) {
+      return;
+    }
+
+    const transactionDocRef = doc(fireStore, 'QR', docId);
+    await setDoc(transactionDocRef, {
+      paymentId,
+      status: 'SUCCESS',
+      updatedAt: Timestamp.fromDate(new Date(paymentDate)),
     });
 
     return doc;
