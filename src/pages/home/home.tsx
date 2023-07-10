@@ -6,7 +6,7 @@ const Carousel = dynamic(() => import('@/components/carousel/carousel'), {
   ssr: false,
 });
 
-const images = ['/web-1.jpg', '/web-2.jpg'];
+const images = ['/web-1.avif', '/web-2.avif'];
 
 export default function Home() {
   return (

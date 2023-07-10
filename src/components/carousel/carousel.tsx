@@ -66,12 +66,18 @@ export default function Carousel({ images }: CarouseItemProps) {
   }, [emblaApi]);
 
   return (
-    <div className="embla relative">
+    <div className="embla md:3/4 relative mx-auto w-full lg:w-3/5">
       <div className={styles.carousel} ref={emblaRef}>
         <div className={styles['carousel-container']}>
           {images.map((image, i) => (
             <div className={styles['carousel-item']} key={`carousel-${i}`}>
-              <Image src={image} alt="img-1" fill priority sizes="100vw" />
+              <Image
+                src={image}
+                alt="img-1"
+                sizes="(max-width: 768px) 50vw, (max-width: 1280) 60vw, 80vw"
+                fill
+                priority
+              />
             </div>
           ))}
         </div>
