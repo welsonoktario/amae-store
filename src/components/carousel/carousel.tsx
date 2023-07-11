@@ -74,7 +74,7 @@ export default function Carousel({ images }: CarouseItemProps) {
               <Image
                 src={image}
                 alt="img-1"
-                sizes="(max-width: 768px) 100vw, (max-width: 1280) 80vw, 60vw"
+                sizes="(max-width: 639px) 100vw, (max-width: 767px) 80vw, 60vw"
                 fill
                 priority
               />
