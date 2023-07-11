@@ -28,27 +28,29 @@ export default function SectionTopUp() {
           )}
 
           {status == 'success' &&
-            chunk(products, width < 786 ? 3 : 6).map((chunk, i) => {
-              return (
-                <div
-                  className="flex items-center justify-center space-x-4"
-                  key={`chunk-${i}`}
-                >
-                  {chunk.map(
-                    (product) =>
-                      product.detail && (
-                        <CardGame
-                          key={product.detail.slug}
-                          slug={product.detail.slug}
-                          title={product.detail.title}
-                          thumbnail={product.detail.thumbnail}
-                          className={clsx(width < 768 && 'flex-1')}
-                        />
-                      ),
-                  )}
-                </div>
-              );
-            })}
+            chunk(products, width < 786 ? 3 : 6).map(
+              (chunk: any, i: number) => {
+                return (
+                  <div
+                    className="flex items-center justify-center space-x-4"
+                    key={`chunk-${i}`}
+                  >
+                    {chunk.map(
+                      (product: any) =>
+                        product.detail && (
+                          <CardGame
+                            key={product.detail.slug}
+                            slug={product.detail.slug}
+                            title={product.detail.title}
+                            thumbnail={product.detail.thumbnail}
+                            className={clsx(width < 768 && 'flex-1')}
+                          />
+                        ),
+                    )}
+                  </div>
+                );
+              },
+            )}
         </>
       )}
     </section>
